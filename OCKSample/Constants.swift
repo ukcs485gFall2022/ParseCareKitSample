@@ -64,7 +64,7 @@ extension AppError: LocalizedError {
 }
 
 enum Constants {
-    static let parseConfigFileName = "ParseCareKit"
+    static let parseConfigFileName = "ParseCareKit" // -heroku
     static let iOSParseCareStoreName = "iOSParseStore"
     static let iOSLocalCareStoreName = "iOSLocalStore"
     static let watchOSParseCareStoreName = "watchOSParseStore"
