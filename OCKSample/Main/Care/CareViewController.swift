@@ -175,7 +175,10 @@ class CareViewController: OCKDailyPageViewController {
                                     on date: Date) -> [UIViewController]? {
         switch task.id {
         case TaskID.steps:
-            let linkView = LinkView(title: .init("My Link"), links: [.website("http://www.engr.uky.edu/research-faculty/departments/computer-science", title: "College of Engineering")])
+            let linkView = LinkView(title: .init("My Link"),
+                                    // swiftlint:disable:next line_length
+                                    links: [.website("http://www.engr.uky.edu/research-faculty/departments/computer-science",
+                                                     title: "College of Engineering")])
             let view = NumericProgressTaskView(
                 task: task,
                 eventQuery: OCKEventQuery(for: date),
@@ -256,10 +259,20 @@ class CareViewController: OCKDailyPageViewController {
             return cards
 
         default:
-            let labelView = LabeledValueTaskView(task: task,
-                                                 eventQuery: .init(for: Date()),
-                                                 storeManager: storeManager)
-            return [labelView.formattedHostingController()]
+            // Check if a healthKit task
+            guard task is OCKHealthKitTask else {
+                return [OCKSimpleTaskViewController(task: task,
+                                                    eventQuery: .init(for: date),
+                                                    storeManager: self.storeManager)]
+            }
+            let view = LabeledValueTaskView(
+                task: task,
+                eventQuery: OCKEventQuery(for: date),
+                storeManager: self.storeManager)
+                .padding([.vertical], 20)
+                .careKitStyle(CustomStylerKey.defaultValue)
+
+            return [view.formattedHostingController()]
         }
     }
 
@@ -267,10 +280,7 @@ class CareViewController: OCKDailyPageViewController {
         var query = OCKTaskQuery(for: date)
         query.excludesTasksWithNoEvents = true
         do {
-            let tasks = try await storeManager.store.fetchAnyTasks(query: query)
-            let orderedTasks = TaskID.ordered.compactMap { orderedTaskID in
-                tasks.first(where: { $0.id == orderedTaskID }) }
-            return orderedTasks
+            return try await storeManager.store.fetchAnyTasks(query: query)
         } catch {
             Logger.feed.error("\(error.localizedDescription, privacy: .public)")
             return []

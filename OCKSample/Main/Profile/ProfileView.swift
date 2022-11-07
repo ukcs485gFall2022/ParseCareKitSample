@@ -28,18 +28,18 @@ struct ProfileView: View {
                         .padding()
                         .cornerRadius(20.0)
                         .shadow(radius: 10.0, x: 20, y: 10)
-                    
+
                     TextField("Last Name", text: $lastName)
                         .padding()
                         .cornerRadius(20.0)
                         .shadow(radius: 10.0, x: 20, y: 10)
-                    
+
                     DatePicker("Birthday", selection: $birthday, displayedComponents: [DatePickerComponents.date])
                         .padding()
                         .cornerRadius(20.0)
                         .shadow(radius: 10.0, x: 20, y: 10)
                 }
-                
+
                 Button(action: {
                     Task {
                         do {
@@ -59,7 +59,7 @@ struct ProfileView: View {
                 })
                 .background(Color(.green))
                 .cornerRadius(15)
-                
+
                 // Notice that "action" is a closure (which is essentially
                 // a function as argument like we discussed in class)
                 Button(action: {
@@ -84,7 +84,6 @@ struct ProfileView: View {
                     .sheet(isPresented: $isPresentingAddTask) {
                         TaskView()
                     }
-                    // Label(, systemImage: "plus")
                 }
             }
         }.onReceive(viewModel.$patient, perform: { patient in

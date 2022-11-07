@@ -83,7 +83,7 @@ extension OCKStore {
         }
 
         // let testSchedule = OCKSchedule(composing: <#T##[OCKSchedule]#>)
-        
+
         let schedule = OCKSchedule(composing: [
             OCKScheduleElement(start: beforeBreakfast, end: nil,
                                interval: DateComponents(day: 1)),

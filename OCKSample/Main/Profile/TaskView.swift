@@ -9,15 +9,27 @@
 import SwiftUI
 
 struct TaskView: View {
-    @State var asset = ""
     @StateObject var viewModel = TaskViewModel()
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        Button("Add Task") {
-            viewModel.instructions = "Hello"
-            Task {
-                await viewModel.addTask()
+        Form {
+            TextField("Title",
+                      text: $viewModel.title)
+            TextField("Instructions",
+                      text: $viewModel.instructions)
+            Section("Task") {
+                Button("Add") {
+                    Task {
+                        await viewModel.addTask()
+                    }
+                }
+            }
+            Section("HealthKitTask") {
+                Button("Add") {
+                    Task {
+                        await viewModel.addHealthKitTask()
+                    }
+                }
             }
         }
     }

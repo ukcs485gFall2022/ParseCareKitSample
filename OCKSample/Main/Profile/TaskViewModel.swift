@@ -11,44 +11,35 @@ import CareKitStore
 import os.log
 
 class TaskViewModel: ObservableObject {
+    @Published var title = ""
     @Published var instructions = ""
-    @Published var task = OCKTask(id: "",
-                                  title: nil,
-                                  carePlanUUID: nil,
-                                  schedule: .dailyAtTime(hour: 0,
-                                                         minutes: 0,
-                                                         start: Date(),
-                                                         end: nil,
-                                                         text: nil))
-    @Published var healthKitTask = OCKHealthKitTask(id: "",
-                                                    title: nil,
-                                                    carePlanUUID: nil,
-                                                    schedule: .dailyAtTime(hour: 0,
-                                                                           minutes: 0,
-                                                                           start: Date(),
-                                                                           end: nil,
-                                                                           text: nil),
-                                                        
-                                                    healthKitLinkage: .init(quantityIdentifier: .electrodermalActivity,
-                                                                            quantityType: .cumulative,
-                                                                            unit: .count()))
-    @Published var error: AppError?
-    
+    @Published var error: AppError? {
+        willSet {
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        }
+    }
+
     // MARK: Intents
     func addTask() async {
         guard let appDelegate = AppDelegateKey.defaultValue else {
             error = AppError.couldntBeUnwrapped
             return
         }
-        
-        var updatedTask = task
-        if instructions != updatedTask.instructions {
-            updatedTask.instructions = instructions
-        }
-        
+        let uniqueId = UUID().uuidString // Create a unique id for each task
+        var task = OCKTask(id: uniqueId,
+                           title: title,
+                           carePlanUUID: nil,
+                           schedule: .dailyAtTime(hour: 0,
+                                                  minutes: 0,
+                                                  start: Date(),
+                                                  end: nil,
+                                                  text: nil))
+        task.instructions = instructions
         do {
-            let taskInStore = try await appDelegate.storeManager.store.addAnyTask(updatedTask) //.addTasksIfNotPresent([updatedTask])
-            Logger.task.info("Saved task: \(taskInStore.id, privacy: .private)")
+            try await appDelegate.storeManager.addTasksIfNotPresent([task])
+            Logger.task.info("Saved task: \(task.id, privacy: .private)")
         } catch {
             self.error = AppError.errorString("Couldn't add task: \(error.localizedDescription)")
         }
@@ -59,15 +50,24 @@ class TaskViewModel: ObservableObject {
             error = AppError.couldntBeUnwrapped
             return
         }
-        
-        var updatedHealthKitTask = healthKitTask
-        if instructions != updatedHealthKitTask.instructions {
-            updatedHealthKitTask.instructions = instructions
-        }
-        
+        let uniqueId = UUID().uuidString // Create a unique id for each task
+        var healthKitTask = OCKHealthKitTask(id: uniqueId,
+                                             title: title,
+                                             carePlanUUID: nil,
+                                             schedule: .dailyAtTime(hour: 0,
+                                                                    minutes: 0,
+                                                                    start: Date(),
+                                                                    end: nil,
+                                                                    text: nil),
+                                             healthKitLinkage: .init(quantityIdentifier: .electrodermalActivity,
+                                                                     quantityType: .discrete,
+                                                                     unit: .count()))
+        healthKitTask.instructions = instructions
         do {
-            try await appDelegate.healthKitStore?.addTasksIfNotPresent([updatedHealthKitTask]) // try await appDelegate.storeManager.store.addAnyTask(updatedHealthKitTask) //
-            // Logger.task.info("Saved task: \(taskInStore.id, privacy: .private)")
+            try await appDelegate.storeManager.addTasksIfNotPresent([healthKitTask])
+            // Ask HealthKit store for permissions after each new task
+            Utility.requestHealthKitPermissions()
+            Logger.task.info("Saved HealthKitTask: \(healthKitTask.id, privacy: .private)")
         } catch {
             self.error = AppError.errorString("Couldn't add task: \(error.localizedDescription)")
         }
