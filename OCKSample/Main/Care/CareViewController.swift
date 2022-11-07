@@ -175,6 +175,7 @@ class CareViewController: OCKDailyPageViewController {
                                     on date: Date) -> [UIViewController]? {
         switch task.id {
         case TaskID.steps:
+            let linkView = LinkView(title: .init("My Link"), links: [.website("http://www.engr.uky.edu/research-faculty/departments/computer-science", title: "College of Engineering")])
             let view = NumericProgressTaskView(
                 task: task,
                 eventQuery: OCKEventQuery(for: date),
@@ -182,7 +183,7 @@ class CareViewController: OCKDailyPageViewController {
                 .padding([.vertical], 20)
                 .careKitStyle(CustomStylerKey.defaultValue)
 
-            return [view.formattedHostingController()]
+            return [view.formattedHostingController(), linkView.formattedHostingController()]
         case TaskID.stretch:
             return [OCKInstructionsTaskViewController(task: task,
                                                      eventQuery: .init(for: date),
@@ -217,7 +218,7 @@ class CareViewController: OCKDailyPageViewController {
 
             // Create a plot comparing nausea to medication adherence.
             let nauseaDataSeries = OCKDataSeriesConfiguration(
-                taskID: "nausea",
+                taskID: TaskID.nausea,
                 legendTitle: "Nausea",
                 gradientStartColor: nauseaGradientStart,
                 gradientEndColor: nauseaGradientEnd,
@@ -225,7 +226,7 @@ class CareViewController: OCKDailyPageViewController {
                 eventAggregator: OCKEventAggregator.countOutcomeValues)
 
             let doxylamineDataSeries = OCKDataSeriesConfiguration(
-                taskID: "doxylamine",
+                taskID: TaskID.doxylamine,
                 legendTitle: "Doxylamine",
                 gradientStartColor: .systemGray2,
                 gradientEndColor: .systemGray,
@@ -255,7 +256,10 @@ class CareViewController: OCKDailyPageViewController {
             return cards
 
         default:
-            return nil
+            let labelView = LabeledValueTaskView(task: task,
+                                                 eventQuery: .init(for: Date()),
+                                                 storeManager: storeManager)
+            return [labelView.formattedHostingController()]
         }
     }
 
