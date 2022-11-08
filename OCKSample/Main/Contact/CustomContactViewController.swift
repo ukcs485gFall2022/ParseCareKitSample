@@ -192,7 +192,6 @@ extension CustomContactViewController: OCKContactViewControllerDelegate {
     func contactViewController<C, VS>(_ viewController: CareKit.OCKContactViewController<C, VS>, didEncounterError error: Error) where C: CareKit.OCKContactController, VS: CareKit.OCKContactViewSynchronizerProtocol {
         Logger.contact.error("\(error.localizedDescription)")
     }
-
 }
 
 extension CustomContactViewController: CNContactPickerDelegate {
