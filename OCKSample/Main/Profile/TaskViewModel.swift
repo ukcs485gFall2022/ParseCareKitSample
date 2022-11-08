@@ -13,6 +13,7 @@ import os.log
 class TaskViewModel: ObservableObject {
     @Published var title = ""
     @Published var instructions = ""
+    @Published var selectedCard: CareKitCard = .button
     @Published var error: AppError? {
         willSet {
             DispatchQueue.main.async {
@@ -37,6 +38,7 @@ class TaskViewModel: ObservableObject {
                                                   end: nil,
                                                   text: nil))
         task.instructions = instructions
+        task.card = selectedCard
         do {
             try await appDelegate.storeManager.addTasksIfNotPresent([task])
             Logger.task.info("Saved task: \(task.id, privacy: .private)")
@@ -65,6 +67,7 @@ class TaskViewModel: ObservableObject {
                                                                      quantityType: .discrete,
                                                                      unit: .count()))
         healthKitTask.instructions = instructions
+        healthKitTask.card = selectedCard
         do {
             try await appDelegate.storeManager.addTasksIfNotPresent([healthKitTask])
             Logger.task.info("Saved HealthKitTask: \(healthKitTask.id, privacy: .private)")

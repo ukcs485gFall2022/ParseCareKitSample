@@ -170,14 +170,19 @@ class CareViewController: OCKDailyPageViewController {
         }
     }
 
+    // swiftlint:disable:next cyclomatic_complexity
     private func taskViewController(for task: OCKAnyTask,
                                     on date: Date) -> [UIViewController]? {
-        switch task.id {
-        case TaskID.steps:
-            let linkView = LinkView(title: .init("My Link"),
-                                    // swiftlint:disable:next line_length
-                                    links: [.website("http://www.engr.uky.edu/research-faculty/departments/computer-science",
-                                                     title: "College of Engineering")])
+        let cardView: CareKitCard!
+        if let task = task as? OCKTask {
+            cardView = task.card
+        } else if let task = task as? OCKHealthKitTask {
+            cardView = task.card
+        } else {
+            return nil
+        }
+        switch cardView {
+        case .numericProgress:
             let view = NumericProgressTaskView(
                 task: task,
                 eventQuery: OCKEventQuery(for: date),
@@ -185,13 +190,13 @@ class CareViewController: OCKDailyPageViewController {
                 .padding([.vertical], 20)
                 .careKitStyle(CustomStylerKey.defaultValue)
 
-            return [view.formattedHostingController(), linkView.formattedHostingController()]
-        case TaskID.stretch:
+            return [view.formattedHostingController()]
+        case .instruction:
             return [OCKInstructionsTaskViewController(task: task,
                                                      eventQuery: .init(for: date),
                                                      storeManager: self.storeManager)]
 
-        case TaskID.kegels:
+        case .simple:
             /*
              Since the kegel task is only scheduled every other day, there will be cases
              where it is not contained in the tasks array returned from the query.
@@ -201,14 +206,14 @@ class CareViewController: OCKDailyPageViewController {
                                                storeManager: self.storeManager)]
 
         // Create a card for the doxylamine task if there are events for it on this day.
-        case TaskID.doxylamine:
+        case .checklist:
 
             return [OCKChecklistTaskViewController(
                 task: task,
                 eventQuery: .init(for: date),
                 storeManager: self.storeManager)]
 
-        case TaskID.nausea:
+        case .button:
             var cards = [UIViewController]()
             // dynamic gradient colors
             let nauseaGradientStart = UIColor { traitCollection -> UIColor in
@@ -256,6 +261,21 @@ class CareViewController: OCKDailyPageViewController {
                                                             storeManager: self.storeManager)
             cards.append(nauseaCard)
             return cards
+        case .labeledValue:
+            let view = LabeledValueTaskView(
+                task: task,
+                eventQuery: OCKEventQuery(for: date),
+                storeManager: self.storeManager)
+                .padding([.vertical], 20)
+                .careKitStyle(CustomStylerKey.defaultValue)
+
+            return [view.formattedHostingController()]
+        case .link:
+            let linkView = LinkView(title: .init("My Link"),
+                                    // swiftlint:disable:next line_length
+                                    links: [.website("http://www.engr.uky.edu/research-faculty/departments/computer-science",
+                                                     title: "College of Engineering")])
+            return [linkView.formattedHostingController()]
 
         default:
             // Check if a healthKit task

@@ -12,22 +12,29 @@ struct TaskView: View {
     @StateObject var viewModel = TaskViewModel()
 
     var body: some View {
-        Form {
-            TextField("Title",
-                      text: $viewModel.title)
-            TextField("Instructions",
-                      text: $viewModel.instructions)
-            Section("Task") {
-                Button("Add") {
-                    Task {
-                        await viewModel.addTask()
+        NavigationView {
+            Form {
+                TextField("Title",
+                          text: $viewModel.title)
+                TextField("Instructions",
+                          text: $viewModel.instructions)
+                Picker("Card View", selection: $viewModel.selectedCard) {
+                    ForEach(CareKitCard.allCases) { item in
+                        Text(item.rawValue)
                     }
                 }
-            }
-            Section("HealthKitTask") {
-                Button("Add") {
-                    Task {
-                        await viewModel.addHealthKitTask()
+                Section("Task") {
+                    Button("Add") {
+                        Task {
+                            await viewModel.addTask()
+                        }
+                    }
+                }
+                Section("HealthKitTask") {
+                    Button("Add") {
+                        Task {
+                            await viewModel.addHealthKitTask()
+                        }
                     }
                 }
             }
