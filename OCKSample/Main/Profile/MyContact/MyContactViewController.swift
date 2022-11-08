@@ -70,7 +70,7 @@ class MyContactViewController: OCKListViewController {
         }
 
         /*
-         xTODO: to get credit: How would you modify this query to only fetch the contact that belongs to this device?
+         xTODO: How would you modify this query to only fetch the contact that belongs to this device?
          
          Hint 1: There are multiple ways to do this. You can modify the query
          below which can work.

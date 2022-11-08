@@ -38,6 +38,7 @@
 		70736CAC291A220C007D5604 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70736CAB291A220C007D5604 /* ImagePicker.swift */; };
 		70736CB0291A22AF007D5604 /* MyContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70736CAF291A22AF007D5604 /* MyContactView.swift */; };
 		70736CB2291A22C6007D5604 /* MyContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70736CB1291A22C6007D5604 /* MyContactViewController.swift */; };
+		70736CB8291AB293007D5604 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70736CB7291AB293007D5604 /* ProfileImageView.swift */; };
 		7075151E28DE1A8300A57A0C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7075151C28DE1A7400A57A0C /* MainView.swift */; };
 		7075152028DE1BB400A57A0C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7075151F28DE1BB400A57A0C /* LoginView.swift */; };
 		707CC714254DA91900116728 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 707CC70F254DA91900116728 /* Localizable.strings */; };
@@ -192,6 +193,7 @@
 		70736CAB291A220C007D5604 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		70736CAF291A22AF007D5604 /* MyContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactView.swift; sourceTree = "<group>"; };
 		70736CB1291A22C6007D5604 /* MyContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactViewController.swift; sourceTree = "<group>"; };
+		70736CB7291AB293007D5604 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		7075151C28DE1A7400A57A0C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7075151F28DE1BB400A57A0C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		707CC710254DA91900116728 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				70736CAB291A220C007D5604 /* ImagePicker.swift */,
+				70736CB7291AB293007D5604 /* ProfileImageView.swift */,
 				7036E4C8256E1A6F006E9A3C /* ProfileView.swift */,
 				7036E516256F2413006E9A3C /* ProfileViewModel.swift */,
 				70736CAE291A229A007D5604 /* MyContact */,
@@ -827,6 +830,7 @@
 				918FDEB5271B40590045A0EF /* Installation.swift in Sources */,
 				B511F09328F60AC70078C7BB /* AppearanceStyle.swift in Sources */,
 				70F921AC27CABE3000368CEC /* SessionDelegate.swift in Sources */,
+				70736CB8291AB293007D5604 /* ProfileImageView.swift in Sources */,
 				70F0EFEA28C2EE6C0005B5A2 /* AppDelegateKey.swift in Sources */,
 				7036E64025717F85006E9A3C /* Constants.swift in Sources */,
 				918FDEBC271B4E4A0045A0EF /* Calendar+Dates.swift in Sources */,

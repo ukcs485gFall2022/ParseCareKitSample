@@ -45,7 +45,7 @@ class TaskViewModel: ObservableObject {
             // Notify views they should refresh tasks if needed
             NotificationCenter.default.post(.init(name: Notification.Name(rawValue: Constants.shouldRefreshView)))
         } catch {
-            self.error = AppError.errorString("Couldn't add task: \(error.localizedDescription)")
+            self.error = AppError.errorString("Could not add task: \(error.localizedDescription)")
         }
     }
 
@@ -76,7 +76,7 @@ class TaskViewModel: ObservableObject {
             // Ask HealthKit store for permissions after each new task
             Utility.requestHealthKitPermissions()
         } catch {
-            self.error = AppError.errorString("Couldn't add task: \(error.localizedDescription)")
+            self.error = AppError.errorString("Could not add task: \(error.localizedDescription)")
         }
     }
 }

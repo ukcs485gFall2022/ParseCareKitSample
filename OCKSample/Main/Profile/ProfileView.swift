@@ -16,61 +16,25 @@ struct ProfileView: View {
     @Environment(\.tintColor) private var tintColor
     @StateObject var viewModel = ProfileViewModel()
     @ObservedObject var loginViewModel: LoginViewModel
-    @State var firstName = ""
-    @State var lastName = ""
-    @State var birthday = Date()
-    @State var isPresentingAddTask = false
-    /* @State var note = ""
-    @State var sex = OCKBiologicalSex.other("unspecified")
-    @State private var sexOtherField = ""
-    @State private var street = ""
-    @State private var city = ""
-    @State private var state = ""
-    @State private var zipcode = "" */
-    @State var showContact = false
-    @State var showingImagePicker = false
 
     var body: some View {
         NavigationView {
             VStack {
-                VStack(alignment: .leading) {
-                    if let image = viewModel.profileUIImage {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 100, height: 100, alignment: .center)
-                            .clipShape(Circle())
-                            .shadow(radius: 10)
-                            .overlay(Circle().stroke(Color(tintColor), lineWidth: 5))
-                            .onTapGesture {
-                                self.showingImagePicker = true
-                            }
-                    } else {
-                        Image(systemName: "person.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 100, height: 100, alignment: .center)
-                            .clipShape(Circle())
-                            .shadow(radius: 10)
-                            .overlay(Circle().stroke(Color(tintColor), lineWidth: 5))
-                            .onTapGesture {
-                                self.showingImagePicker = true
-                            }
-                    }
+                VStack {
+                    ProfileImageView(viewModel: viewModel)
                     Form {
                         Section(header: Text("About")) {
-                            TextField("First Name", text: $firstName)
-                            TextField("Last Name", text: $lastName)
+                            TextField("First Name", text: $viewModel.firstName)
+                            TextField("Last Name", text: $viewModel.lastName)
                             DatePicker("Birthday",
-                                       selection: $birthday,
+                                       selection: $viewModel.birthday,
                                        displayedComponents: [DatePickerComponents.date])
                             Picker(selection: $viewModel.sex,
                                    label: Text("Sex")) {
                                 Text(OCKBiologicalSex.female.rawValue).tag(OCKBiologicalSex.female)
                                 Text(OCKBiologicalSex.male.rawValue).tag(OCKBiologicalSex.male)
-                                TextField("Other",
-                                          text: $viewModel.sexOtherField)
-                                .tag(OCKBiologicalSex.other(viewModel.sexOtherField))
+                                Text(viewModel.sex.rawValue)
+                                    .tag(OCKBiologicalSex.other(viewModel.sexOtherField))
                             }
                         }
                         Section(header: Text("Contact")) {
@@ -84,13 +48,7 @@ struct ProfileView: View {
 
                 Button(action: {
                     Task {
-                        do {
-                            try await viewModel.saveProfile(firstName,
-                                                            last: lastName,
-                                                            birth: birthday)
-                        } catch {
-                            Logger.profile.error("Error saving profile: \(error.localizedDescription)")
-                        }
+                        await viewModel.saveProfile()
                     }
                 }, label: {
                     Text("Save Profile")
@@ -121,24 +79,24 @@ struct ProfileView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Add Task") {
-                        self.isPresentingAddTask.toggle()
+                        viewModel.isPresentingAddTask.toggle()
                     }
-                    .sheet(isPresented: $isPresentingAddTask) {
+                    .sheet(isPresented: $viewModel.isPresentingAddTask) {
                         TaskView()
                     }
                 }
             }
-        }.onReceive(viewModel.$patient, perform: { patient in
-            if let currentFirstName = patient?.name.givenName {
-                firstName = currentFirstName
+            .sheet(isPresented: $viewModel.isPresentingImagePicker) {
+                ImagePicker(image: $viewModel.profileUIImage)
             }
-            if let currentLastName = patient?.name.familyName {
-                lastName = currentLastName
+            .alert(isPresented: $viewModel.isShowingSaveAlert) {
+                return Alert(title: Text("Update"),
+                             message: Text(viewModel.alertMessage),
+                             dismissButton: .default(Text("Ok"), action: {
+                                viewModel.isShowingSaveAlert = false
+                             }))
             }
-            if let currentBirthday = patient?.birthday {
-                birthday = currentBirthday
-            }
-        })
+        }
     }
 }
 

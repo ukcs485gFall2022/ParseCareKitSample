@@ -212,13 +212,13 @@ extension CustomContactViewController: CNContactPickerDelegate {
         if !(self.allContacts.contains { $0.id == contactToAdd.id }) {
 
             // Note - once the functionality is added to edit a contact,
-            // and let the user potentially edit before the save
+            // let the user potentially edit before the save
             Task {
                 do {
                     _ = try await storeManager.store.addAnyContact(contactToAdd)
                     try? await self.fetchContacts()
                 } catch {
-                    Logger.contact.error("Couldn't add contact: \(error.localizedDescription)")
+                    Logger.contact.error("Could not add contact: \(error.localizedDescription)")
                 }
             }
         }
@@ -247,7 +247,7 @@ extension CustomContactViewController: CNContactPickerDelegate {
                 _ = try await storeManager.store.addAnyContacts(immutableContactsToAdd)
                 try? await self.fetchContacts()
             } catch {
-                Logger.contact.error("Couldn't add contacts: \(error.localizedDescription)")
+                Logger.contact.error("Could not add contacts: \(error.localizedDescription)")
             }
         }
     }
