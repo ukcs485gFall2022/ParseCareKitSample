@@ -13,31 +13,73 @@ import CareKit
 import os.log
 
 struct ProfileView: View {
+    @Environment(\.tintColor) private var tintColor
     @StateObject var viewModel = ProfileViewModel()
     @ObservedObject var loginViewModel: LoginViewModel
     @State var firstName = ""
     @State var lastName = ""
     @State var birthday = Date()
     @State var isPresentingAddTask = false
+    /* @State var note = ""
+    @State var sex = OCKBiologicalSex.other("unspecified")
+    @State private var sexOtherField = ""
+    @State private var street = ""
+    @State private var city = ""
+    @State private var state = ""
+    @State private var zipcode = "" */
+    @State var showContact = false
+    @State var showingImagePicker = false
 
     var body: some View {
         NavigationView {
             VStack {
                 VStack(alignment: .leading) {
-                    TextField("First Name", text: $firstName)
-                        .padding()
-                        .cornerRadius(20.0)
-                        .shadow(radius: 10.0, x: 20, y: 10)
-
-                    TextField("Last Name", text: $lastName)
-                        .padding()
-                        .cornerRadius(20.0)
-                        .shadow(radius: 10.0, x: 20, y: 10)
-
-                    DatePicker("Birthday", selection: $birthday, displayedComponents: [DatePickerComponents.date])
-                        .padding()
-                        .cornerRadius(20.0)
-                        .shadow(radius: 10.0, x: 20, y: 10)
+                    if let image = viewModel.profileUIImage {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 100, height: 100, alignment: .center)
+                            .clipShape(Circle())
+                            .shadow(radius: 10)
+                            .overlay(Circle().stroke(Color(tintColor), lineWidth: 5))
+                            .onTapGesture {
+                                self.showingImagePicker = true
+                            }
+                    } else {
+                        Image(systemName: "person.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 100, height: 100, alignment: .center)
+                            .clipShape(Circle())
+                            .shadow(radius: 10)
+                            .overlay(Circle().stroke(Color(tintColor), lineWidth: 5))
+                            .onTapGesture {
+                                self.showingImagePicker = true
+                            }
+                    }
+                    Form {
+                        Section(header: Text("About")) {
+                            TextField("First Name", text: $firstName)
+                            TextField("Last Name", text: $lastName)
+                            DatePicker("Birthday",
+                                       selection: $birthday,
+                                       displayedComponents: [DatePickerComponents.date])
+                            Picker(selection: $viewModel.sex,
+                                   label: Text("Sex")) {
+                                Text(OCKBiologicalSex.female.rawValue).tag(OCKBiologicalSex.female)
+                                Text(OCKBiologicalSex.male.rawValue).tag(OCKBiologicalSex.male)
+                                TextField("Other",
+                                          text: $viewModel.sexOtherField)
+                                .tag(OCKBiologicalSex.other(viewModel.sexOtherField))
+                            }
+                        }
+                        Section(header: Text("Contact")) {
+                            TextField("Street", text: $viewModel.street)
+                            TextField("City", text: $viewModel.city)
+                            TextField("State", text: $viewModel.state)
+                            TextField("Postal code", text: $viewModel.zipcode)
+                        }
+                    }
                 }
 
                 Button(action: {
