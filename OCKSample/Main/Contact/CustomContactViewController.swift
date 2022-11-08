@@ -95,14 +95,13 @@ class CustomContactViewController: OCKListViewController {
 
         guard let convertedContacts = contacts as? [OCKContact],
               let personUUIDString = try? Utility.getRemoteClockUUID().uuidString else {
+            Logger.contact.error("Could not convert contacts")
             return
         }
 
-        let filterdContacts = convertedContacts.filter {
-            // Modify this filter to not show the contact info for this user
-            if $0.id == personUUIDString {
-                return false
-            }
+        // TODO: Modify this filter to not show the contact info for this user
+        let filterdContacts = convertedContacts.filter { convertedContact in
+            Logger.contact.info("Contact filtered: \(convertedContact.id)")
             return true
         }
 
@@ -178,7 +177,6 @@ extension CustomContactViewController: UISearchBarDelegate {
                 return false
             }
         }
-
         displayContacts(filteredContacts)
     }
 
@@ -192,7 +190,6 @@ extension CustomContactViewController: OCKContactViewControllerDelegate {
 
     // swiftlint:disable:next line_length
     func contactViewController<C, VS>(_ viewController: CareKit.OCKContactViewController<C, VS>, didEncounterError error: Error) where C: CareKit.OCKContactController, VS: CareKit.OCKContactViewSynchronizerProtocol {
-
         Logger.contact.error("\(error.localizedDescription)")
     }
 

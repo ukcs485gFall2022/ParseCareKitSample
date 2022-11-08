@@ -83,7 +83,7 @@ class ProfileViewModel: ObservableObject {
             }
         }
     }
-    private var contact: OCKContact? // xTODO: need to publish contact updates like patient
+    private var contact: OCKContact? // TODO: need to publish contact updates like patient
     private var isSettingProfilePictureForFirstTime = true
     private var cancellables: Set<AnyCancellable> = []
 

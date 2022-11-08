@@ -70,13 +70,13 @@ class MyContactViewController: OCKListViewController {
         }
 
         /*
-         xTODO: How would you modify this query to only fetch the contact that belongs to this device?
+         TODO: How would you modify this query to only fetch the contact that belongs to this device?
          
          Hint 1: There are multiple ways to do this. You can modify the query
          below which can work.
          
          Hint2: Look at the other queries in the app related to the uuid of the
-         user who's signed in.
+         user/patient who's signed in.
          
          Hint3: You should have a warning currently, solving this properly would
          get rid of the warning without changing the line the warning is on.
