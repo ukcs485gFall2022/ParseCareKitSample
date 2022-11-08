@@ -40,6 +40,8 @@ class TaskViewModel: ObservableObject {
         do {
             try await appDelegate.storeManager.addTasksIfNotPresent([task])
             Logger.task.info("Saved task: \(task.id, privacy: .private)")
+            // Notify views they should refresh tasks if needed
+            NotificationCenter.default.post(.init(name: Notification.Name(rawValue: Constants.shouldRefreshView)))
         } catch {
             self.error = AppError.errorString("Couldn't add task: \(error.localizedDescription)")
         }
@@ -65,9 +67,11 @@ class TaskViewModel: ObservableObject {
         healthKitTask.instructions = instructions
         do {
             try await appDelegate.storeManager.addTasksIfNotPresent([healthKitTask])
+            Logger.task.info("Saved HealthKitTask: \(healthKitTask.id, privacy: .private)")
+            // Notify views they should refresh tasks if needed
+            NotificationCenter.default.post(.init(name: Notification.Name(rawValue: Constants.shouldRefreshView)))
             // Ask HealthKit store for permissions after each new task
             Utility.requestHealthKitPermissions()
-            Logger.task.info("Saved HealthKitTask: \(healthKitTask.id, privacy: .private)")
         } catch {
             self.error = AppError.errorString("Couldn't add task: \(error.localizedDescription)")
         }
