@@ -55,8 +55,6 @@
 		70A98D62278A2683009B58F2 /* Styler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9169381A271B64E100A634ED /* Styler.swift */; };
 		70A98D63278A268B009B58F2 /* ColorStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9169381C271B650700A634ED /* ColorStyler.swift */; };
 		70A98D68278A2DF1009B58F2 /* TintColorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FDEC2271B4E950045A0EF /* TintColorKey.swift */; };
-		70AECB8828EF2FF100C862CF /* ParseCareKit-heroku.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70AECB8728EF2FF000C862CF /* ParseCareKit-heroku.plist */; };
-		70AECB8928EF2FF100C862CF /* ParseCareKit-heroku.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70AECB8728EF2FF000C862CF /* ParseCareKit-heroku.plist */; };
 		70C0D474279BA492003DA141 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91693821271B897200A634ED /* Utility.swift */; };
 		70CF66E428E1E74C00FAE977 /* TintColorFlipKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF66E328E1E74C00FAE977 /* TintColorFlipKey.swift */; };
 		70CF66E528E1E74C00FAE977 /* TintColorFlipKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF66E328E1E74C00FAE977 /* TintColorFlipKey.swift */; };
@@ -201,7 +199,6 @@
 		707CC713254DA91900116728 /* OCKLocalization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCKLocalization.swift; sourceTree = "<group>"; };
 		7083A855279CA40A00B3832E /* PCKUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCKUtility.swift; sourceTree = "<group>"; };
 		7083CFB12919B5CB00CACC47 /* OCKSynchronizedStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCKSynchronizedStoreManager.swift; sourceTree = "<group>"; };
-		70AECB8728EF2FF000C862CF /* ParseCareKit-heroku.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ParseCareKit-heroku.plist"; sourceTree = "<group>"; };
 		70BD2B1E254B44DB0030B424 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		70CF66E328E1E74C00FAE977 /* TintColorFlipKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TintColorFlipKey.swift; sourceTree = "<group>"; };
 		70F03A902786073300E5AFB4 /* CareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareViewModel.swift; sourceTree = "<group>"; };
@@ -455,7 +452,6 @@
 			children = (
 				E72B2C15226939E4009A9438 /* Info.plist */,
 				91AD922124A45A3900925D4D /* ParseCareKit.plist */,
-				70AECB8728EF2FF000C862CF /* ParseCareKit-heroku.plist */,
 				E7C4CA0A22809AD500ECC3D7 /* Assets.xcassets */,
 				E72B2C12226939E4009A9438 /* LaunchScreen.storyboard */,
 				707CC70E254DA91900116728 /* Localization */,
@@ -718,7 +714,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70AECB8928EF2FF100C862CF /* ParseCareKit-heroku.plist in Resources */,
 				707CC715254DA91900116728 /* Localizable.strings in Resources */,
 				91AD924624A4C42E00925D4D /* Preview Assets.xcassets in Resources */,
 				91AD922D24A4C42D00925D4D /* Assets.xcassets in Resources */,
@@ -736,7 +731,6 @@
 				E7C4CA0B22809AD500ECC3D7 /* Assets.xcassets in Resources */,
 				91AD922224A45A3900925D4D /* ParseCareKit.plist in Resources */,
 				91AD922424A461D200925D4D /* README.md in Resources */,
-				70AECB8828EF2FF100C862CF /* ParseCareKit-heroku.plist in Resources */,
 				91693820271B80EA00A634ED /* CONTRIBUTING.md in Resources */,
 				E72B2C14226939E4009A9438 /* LaunchScreen.storyboard in Resources */,
 				707CC716254DA91900116728 /* Localizable.stringsdict in Resources */,
@@ -763,7 +757,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n    swiftlint --fix && swiftlint --strict\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n    swiftlint --fix && swiftlint --strict | sed \"s/warning:/error:/\"\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
