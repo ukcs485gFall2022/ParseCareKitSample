@@ -4,4 +4,3 @@ disabled_rules:
   - weak_delegate
   - file_length
   - function_body_length
-
