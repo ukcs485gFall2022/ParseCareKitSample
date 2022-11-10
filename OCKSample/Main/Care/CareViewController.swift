@@ -36,6 +36,7 @@ import CareKit
 import CareKitStore
 import CareKitUI
 import os.log
+import ResearchKit
 
 class CareViewController: OCKDailyPageViewController {
 
@@ -305,7 +306,41 @@ class CareViewController: OCKDailyPageViewController {
             return []
         }
     }
+
+    @MainActor
+    private func checkIfOnboardingIsComplete() async -> Bool {
+        
+             var query = OCKOutcomeQuery()
+             query.taskIDs = [TaskID.onboarding]
+
+             // swiftlint:disable:next force_cast
+             let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
+             guard let store = appDelegate.store else {
+                 Logger.feed.error("CareKit store couldn't be unwrapped")
+                 return false
+             }
+
+             do {
+                 let outcomes = try await store.fetchOutcomes(query: query)
+                 return !outcomes.isEmpty
+             } catch {
+                 return false
+             }
+         }
 }
+
+extension CareViewController: OCKSurveyTaskViewControllerDelegate {
+     func surveyTask(
+             viewController: OCKSurveyTaskViewController,
+             for task: OCKAnyTask,
+             didFinish result: Result<ORKTaskViewControllerFinishReason, Error>) {
+
+         if case let .success(reason) = result, reason == .completed {
+             reload()
+         }
+     }
+ }
 
 private extension View {
     func formattedHostingController() -> UIHostingController<Self> {
