@@ -1,24 +1,21 @@
 //
-//  Surveys.swift
+//  Survey+Onboarding.swift
 //  OCKSample
 //
 //  Created by Corey Baker on 11/11/22.
 //  Copyright © 2022 Network Reconnaissance Lab. All rights reserved.
 //
 
+import Foundation
 import CareKitStore
 import ResearchKit
 
-struct Surveys {
-
-    private init() {}
-
-    // MARK: Onboarding
-    static func onboardingSurvey() -> ORKTask {
+extension Survey {
+    static func onboarding() -> ORKTask {
 
         // The Welcome Instruction step.
         let welcomeInstructionStep = ORKInstructionStep(
-            identifier: "onboarding.welcome"
+            identifier: "\(Self.onboard.identifier()).welcome"
         )
 
         welcomeInstructionStep.title = "Welcome!"
@@ -28,7 +25,7 @@ struct Surveys {
 
         // The Informed Consent Instruction step.
         let studyOverviewInstructionStep = ORKInstructionStep(
-            identifier: "onboarding.overview"
+            identifier: "\(Self.onboard.identifier()).overview"
         )
 
         studyOverviewInstructionStep.title = "Before You Join"
@@ -75,7 +72,7 @@ struct Surveys {
 
         // The Signature step (using WebView).
         let webViewStep = ORKWebViewStep(
-            identifier: "onboarding.signatureCapture",
+            identifier: "\(Self.onboard.identifier()).signatureCapture",
             html: informedConsentHTML
         )
 
@@ -107,7 +104,7 @@ struct Surveys {
         let motionPermissionType = ORKMotionActivityPermissionType()
 
         let requestPermissionsStep = ORKRequestPermissionsStep(
-            identifier: "onboarding.requestPermissionsStep",
+            identifier: "\(Self.onboard.identifier()).requestPermissionsStep",
             permissionTypes: [
                 healthKitPermissionType,
                 notificationsPermissionType,
@@ -121,7 +118,7 @@ struct Surveys {
 
         // Completion Step
         let completionStep = ORKCompletionStep(
-            identifier: "onboarding.completionStep"
+            identifier: "\(Self.onboard.identifier()).completionStep"
         )
 
         completionStep.title = "Enrollment Complete"
@@ -129,7 +126,7 @@ struct Surveys {
         completionStep.text = "Thank you for enrolling in this study. Your participation will contribute to meaningful research!"
 
         let surveyTask = ORKOrderedTask(
-            identifier: "onboard",
+            identifier: Self.onboard.identifier(),
             steps: [
                 welcomeInstructionStep,
                 studyOverviewInstructionStep,
@@ -138,7 +135,10 @@ struct Surveys {
                 completionStep
             ]
         )
-
         return surveyTask
+    }
+
+    static func extractAnswersFromOnboardSurvey(_ result: ORKTaskResult) -> [OCKOutcomeValue]? {
+        [OCKOutcomeValue(Date())]
     }
 }
