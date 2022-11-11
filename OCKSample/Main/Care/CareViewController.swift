@@ -38,6 +38,7 @@ import CareKitUI
 import os.log
 import ResearchKit
 
+// swiftlint:disable type_body_length
 class CareViewController: OCKDailyPageViewController {
 
     private var isSyncing = false
@@ -133,24 +134,41 @@ class CareViewController: OCKDailyPageViewController {
      */
     override func dailyPageViewController(_ dailyPageViewController: OCKDailyPageViewController,
                                           prepare listViewController: OCKListViewController, for date: Date) {
-        let isCurrentDay = Calendar.current.isDate(date, inSameDayAs: Date())
-
-        // Only show the tip view on the current date
-        if isCurrentDay {
-            if Calendar.current.isDate(date, inSameDayAs: Date()) {
-                // Add a non-CareKit view into the list
-                let tipTitle = "Benefits of exercising"
-                let tipText = "Learn how activity can promote a healthy pregnancy."
-                let tipView = TipView()
-                tipView.headerView.titleLabel.text = tipTitle
-                tipView.headerView.detailLabel.text = tipText
-                tipView.imageView.image = UIImage(named: "exercise.jpg")
-                tipView.customStyle = CustomStylerKey.defaultValue
-                listViewController.appendView(tipView, animated: false)
-            }
-        }
-
         Task {
+            guard await checkIfOnboardingIsComplete() else {
+                let onboardCard = OCKSurveyTaskViewController(
+                                    taskID: TaskID.onboarding,
+                                    eventQuery: OCKEventQuery(for: date),
+                                    storeManager: self.storeManager,
+                                    survey: Surveys.onboardingSurvey(),
+                                    extractOutcome: { _ in [OCKOutcomeValue(Date())] }
+                                )
+                onboardCard.surveyDelegate = self
+
+                listViewController.appendViewController(
+                    onboardCard,
+                    animated: false
+                )
+                return
+            }
+
+            let isCurrentDay = Calendar.current.isDate(date, inSameDayAs: Date())
+
+            // Only show the tip view on the current date
+            if isCurrentDay {
+                if Calendar.current.isDate(date, inSameDayAs: Date()) {
+                    // Add a non-CareKit view into the list
+                    let tipTitle = "Benefits of exercising"
+                    let tipText = "Learn how activity can promote a healthy pregnancy."
+                    let tipView = TipView()
+                    tipView.headerView.titleLabel.text = tipTitle
+                    tipView.headerView.detailLabel.text = tipText
+                    tipView.imageView.image = UIImage(named: "exercise.jpg")
+                    tipView.customStyle = CustomStylerKey.defaultValue
+                    listViewController.appendView(tipView, animated: false)
+                }
+            }
+
             let tasks = await self.fetchTasks(on: date)
             tasks.compactMap {
                 let cards = self.taskViewController(for: $0, on: date)
@@ -300,7 +318,9 @@ class CareViewController: OCKDailyPageViewController {
         var query = OCKTaskQuery(for: date)
         query.excludesTasksWithNoEvents = true
         do {
-            return try await storeManager.store.fetchAnyTasks(query: query)
+            let tasks = try await storeManager.store.fetchAnyTasks(query: query)
+            // Remove onboarding tasks from array
+            return tasks.filter { $0.id != TaskID.onboarding }
         } catch {
             Logger.feed.error("\(error.localizedDescription, privacy: .public)")
             return []
@@ -309,38 +329,34 @@ class CareViewController: OCKDailyPageViewController {
 
     @MainActor
     private func checkIfOnboardingIsComplete() async -> Bool {
-        
-             var query = OCKOutcomeQuery()
-             query.taskIDs = [TaskID.onboarding]
+        var query = OCKOutcomeQuery()
+        query.taskIDs = [TaskID.onboarding]
 
-             // swiftlint:disable:next force_cast
-             let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        guard let store = AppDelegateKey.defaultValue?.store else {
+            Logger.feed.error("CareKit store could not be unwrapped")
+            return false
+        }
 
-             guard let store = appDelegate.store else {
-                 Logger.feed.error("CareKit store couldn't be unwrapped")
-                 return false
-             }
-
-             do {
-                 let outcomes = try await store.fetchOutcomes(query: query)
-                 return !outcomes.isEmpty
-             } catch {
-                 return false
-             }
-         }
+        do {
+            let outcomes = try await store.fetchAnyOutcomes(query: query)
+            return !outcomes.isEmpty
+        } catch {
+            return false
+        }
+    }
 }
 
 extension CareViewController: OCKSurveyTaskViewControllerDelegate {
-     func surveyTask(
-             viewController: OCKSurveyTaskViewController,
-             for task: OCKAnyTask,
-             didFinish result: Result<ORKTaskViewControllerFinishReason, Error>) {
+    func surveyTask(
+            viewController: OCKSurveyTaskViewController,
+            for task: OCKAnyTask,
+            didFinish result: Result<ORKTaskViewControllerFinishReason, Error>) {
 
-         if case let .success(reason) = result, reason == .completed {
-             reload()
-         }
-     }
- }
+        if case let .success(reason) = result, reason == .completed {
+            reload()
+        }
+    }
+}
 
 private extension View {
     func formattedHostingController() -> UIHostingController<Self> {

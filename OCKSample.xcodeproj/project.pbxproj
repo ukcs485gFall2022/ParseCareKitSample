@@ -32,6 +32,7 @@
 		7036E4D3256EBE35006E9A3C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036E4D2256EBE35006E9A3C /* MainView.swift */; };
 		7036E517256F2413006E9A3C /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036E516256F2413006E9A3C /* ProfileViewModel.swift */; };
 		7036E64025717F85006E9A3C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036E63F25717F85006E9A3C /* Constants.swift */; };
+		7054470F291ED44200743ABD /* ParseCareKit-heroku.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7054470E291ED44200743ABD /* ParseCareKit-heroku.plist */; };
 		70736CA6291A0BAF007D5604 /* OCKBiologicalSex+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70736CA5291A0BAF007D5604 /* OCKBiologicalSex+Hashable.swift */; };
 		70736CA7291A0BAF007D5604 /* OCKBiologicalSex+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70736CA5291A0BAF007D5604 /* OCKBiologicalSex+Hashable.swift */; };
 		70736CA9291A13B9007D5604 /* CustomContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70736CA8291A13B9007D5604 /* CustomContactViewController.swift */; };
@@ -56,6 +57,8 @@
 		70A98D63278A268B009B58F2 /* ColorStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9169381C271B650700A634ED /* ColorStyler.swift */; };
 		70A98D68278A2DF1009B58F2 /* TintColorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FDEC2271B4E950045A0EF /* TintColorKey.swift */; };
 		70C0D474279BA492003DA141 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91693821271B897200A634ED /* Utility.swift */; };
+		70C4D3E1291EA36D0099E9E0 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C4D3E0291EA36D0099E9E0 /* Consent.swift */; };
+		70C4D3E3291EA3BE0099E9E0 /* Surveys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C4D3E2291EA3BE0099E9E0 /* Surveys.swift */; };
 		70CF66E428E1E74C00FAE977 /* TintColorFlipKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF66E328E1E74C00FAE977 /* TintColorFlipKey.swift */; };
 		70CF66E528E1E74C00FAE977 /* TintColorFlipKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF66E328E1E74C00FAE977 /* TintColorFlipKey.swift */; };
 		70DFD80B2567074500B9DB12 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BD2B1E254B44DB0030B424 /* LoginView.swift */; };
@@ -85,6 +88,8 @@
 		70F921B127CAC16E00368CEC /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F921AB27CABE3000368CEC /* SessionDelegate.swift */; };
 		70F921B227CAC16E00368CEC /* RemoteSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F921AD27CABE7700368CEC /* RemoteSessionDelegate.swift */; };
 		70F921B327CAC16E00368CEC /* LocalSyncSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F921AF27CABED600368CEC /* LocalSyncSessionDelegate.swift */; };
+		70FDEAE5291E9B2700A35C37 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5711537291DA30E0057DDF6 /* ResearchKit.framework */; };
+		70FDEAE6291E9B2700A35C37 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B5711537291DA30E0057DDF6 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9103AA5227B8C913002C921E /* FontColorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03AA727860E7700E5AFB4 /* FontColorKey.swift */; };
 		91693818271B5E1600A634ED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036E63F25717F85006E9A3C /* Constants.swift */; };
 		9169381B271B64E100A634ED /* Styler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9169381A271B64E100A634ED /* Styler.swift */; };
@@ -115,8 +120,6 @@
 		B50A9992290B1C92002CD4FD /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50A9991290B1C92002CD4FD /* TaskViewModel.swift */; };
 		B511F09328F60AC70078C7BB /* AppearanceStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B511F09228F60AC70078C7BB /* AppearanceStyle.swift */; };
 		B511F09428F60B060078C7BB /* AppearanceStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B511F09228F60AC70078C7BB /* AppearanceStyle.swift */; };
-		B571153A291DA3870057DDF6 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5711537291DA30E0057DDF6 /* ResearchKit.framework */; };
-		B571153B291DA3870057DDF6 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B5711537291DA30E0057DDF6 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E72B2C0A226939E3009A9438 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72B2C09226939E3009A9438 /* AppDelegate.swift */; };
 		E72B2C14226939E4009A9438 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E72B2C12226939E4009A9438 /* LaunchScreen.storyboard */; };
 		E7440E4F229477F7007AD30A /* CareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7440E4E229477F7007AD30A /* CareViewController.swift */; };
@@ -156,13 +159,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		51431FA223D166AE006A7CFD /* Embed Frameworks */ = {
+		70FDEAE7291E9B2700A35C37 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B571153B291DA3870057DDF6 /* ResearchKit.framework in Embed Frameworks */,
+				70FDEAE6291E9B2700A35C37 /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,6 +205,7 @@
 		7036E4D2256EBE35006E9A3C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7036E516256F2413006E9A3C /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		7036E63F25717F85006E9A3C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7054470E291ED44200743ABD /* ParseCareKit-heroku.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ParseCareKit-heroku.plist"; sourceTree = "<group>"; };
 		705B22BE25E2C1A700C472AC /* OCKWatchSample Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "OCKWatchSample Extension.entitlements"; sourceTree = "<group>"; };
 		70736CA5291A0BAF007D5604 /* OCKBiologicalSex+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCKBiologicalSex+Hashable.swift"; sourceTree = "<group>"; };
 		70736CA8291A13B9007D5604 /* CustomContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomContactViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +221,8 @@
 		7083A855279CA40A00B3832E /* PCKUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCKUtility.swift; sourceTree = "<group>"; };
 		7083CFB12919B5CB00CACC47 /* OCKSynchronizedStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCKSynchronizedStoreManager.swift; sourceTree = "<group>"; };
 		70BD2B1E254B44DB0030B424 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		70C4D3E0291EA36D0099E9E0 /* Consent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consent.swift; sourceTree = "<group>"; };
+		70C4D3E2291EA3BE0099E9E0 /* Surveys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Surveys.swift; sourceTree = "<group>"; };
 		70CF66E328E1E74C00FAE977 /* TintColorFlipKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TintColorFlipKey.swift; sourceTree = "<group>"; };
 		70F03A902786073300E5AFB4 /* CareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareViewModel.swift; sourceTree = "<group>"; };
 		70F03A922786087800E5AFB4 /* OCKAnyEvent+CustomStringConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCKAnyEvent+CustomStringConvertable.swift"; sourceTree = "<group>"; };
@@ -276,7 +282,7 @@
 			files = (
 				70202EC12807333900CF73FB /* CareKit in Frameworks */,
 				918FDEAF271B3F8F0045A0EF /* ParseCareKit in Frameworks */,
-				B571153A291DA3870057DDF6 /* ResearchKit.framework in Frameworks */,
+				70FDEAE5291E9B2700A35C37 /* ResearchKit.framework in Frameworks */,
 				70202EC52807333A00CF73FB /* CareKitUI in Frameworks */,
 				708542F9276687F90029E888 /* HealthKit.framework in Frameworks */,
 				70202EC32807333900CF73FB /* CareKitFHIR in Frameworks */,
@@ -353,6 +359,7 @@
 				70308878258272CD00FFABB6 /* Care */,
 				7030887D258272F400FFABB6 /* Contact */,
 				7030887E2582731300FFABB6 /* Login */,
+				70C4D3DF291EA3580099E9E0 /* Onboarding */,
 				7030887C258272E700FFABB6 /* Profile */,
 				91693819271B64CB00A634ED /* Stylers */,
 			);
@@ -456,6 +463,15 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		70C4D3DF291EA3580099E9E0 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				70C4D3E0291EA36D0099E9E0 /* Consent.swift */,
+				70C4D3E2291EA3BE0099E9E0 /* Surveys.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		70F921AA27CABDE900368CEC /* WatchConnectivity */ = {
 			isa = PBXGroup;
 			children = (
@@ -471,6 +487,7 @@
 			children = (
 				E72B2C15226939E4009A9438 /* Info.plist */,
 				91AD922124A45A3900925D4D /* ParseCareKit.plist */,
+				7054470E291ED44200743ABD /* ParseCareKit-heroku.plist */,
 				E7C4CA0A22809AD500ECC3D7 /* Assets.xcassets */,
 				E72B2C12226939E4009A9438 /* LaunchScreen.storyboard */,
 				707CC70E254DA91900116728 /* Localization */,
@@ -664,9 +681,9 @@
 				E72B2C02226939E3009A9438 /* Sources */,
 				E72B2C04226939E3009A9438 /* Resources */,
 				51431FA123D166AE006A7CFD /* Frameworks */,
-				51431FA223D166AE006A7CFD /* Embed Frameworks */,
 				91AD924C24A4C42E00925D4D /* Embed Watch Content */,
 				9169381E271B6E2100A634ED /* SwiftLint */,
+				70FDEAE7291E9B2700A35C37 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -783,6 +800,7 @@
 				E7C4CA0B22809AD500ECC3D7 /* Assets.xcassets in Resources */,
 				91AD922224A45A3900925D4D /* ParseCareKit.plist in Resources */,
 				91AD922424A461D200925D4D /* README.md in Resources */,
+				7054470F291ED44200743ABD /* ParseCareKit-heroku.plist in Resources */,
 				91693820271B80EA00A634ED /* CONTRIBUTING.md in Resources */,
 				E72B2C14226939E4009A9438 /* LaunchScreen.storyboard in Resources */,
 				707CC716254DA91900116728 /* Localizable.stringsdict in Resources */,
@@ -879,6 +897,7 @@
 				70736CB8291AB293007D5604 /* ProfileImageView.swift in Sources */,
 				70F0EFEA28C2EE6C0005B5A2 /* AppDelegateKey.swift in Sources */,
 				7036E64025717F85006E9A3C /* Constants.swift in Sources */,
+				70C4D3E3291EA3BE0099E9E0 /* Surveys.swift in Sources */,
 				918FDEBC271B4E4A0045A0EF /* Calendar+Dates.swift in Sources */,
 				7083CFB22919B5CB00CACC47 /* OCKSynchronizedStoreManager.swift in Sources */,
 				70F03AA127860AB700E5AFB4 /* OCKOutcome.swift in Sources */,
@@ -914,6 +933,7 @@
 				B50A9992290B1C92002CD4FD /* TaskViewModel.swift in Sources */,
 				707CC718254DA91900116728 /* OCKLocalization.swift in Sources */,
 				70736CA9291A13B9007D5604 /* CustomContactViewController.swift in Sources */,
+				70C4D3E1291EA36D0099E9E0 /* Consent.swift in Sources */,
 				E7C37849228F887800E982D8 /* TipView.swift in Sources */,
 				70077597252228E900EC0EDA /* User.swift in Sources */,
 				70736CB0291A22AF007D5604 /* MyContactView.swift in Sources */,
@@ -1052,8 +1072,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.uky.netrecon.ParseCarekitSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1287,8 +1310,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.uky.netrecon.ParseCarekitSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
