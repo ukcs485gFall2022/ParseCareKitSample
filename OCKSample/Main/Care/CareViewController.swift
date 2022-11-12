@@ -136,12 +136,17 @@ class CareViewController: OCKDailyPageViewController {
                                           prepare listViewController: OCKListViewController, for date: Date) {
         Task {
             guard await checkIfOnboardingIsComplete() else {
-                let onboardCard = OCKSurveyTaskViewController(taskID: Survey.onboard.identifier(),
+                let onboardSurvey = Survey.onboard
+                let onboardCard = OCKSurveyTaskViewController(taskID: onboardSurvey.identifier(),
                                                               eventQuery: OCKEventQuery(for: date),
                                                               storeManager: self.storeManager,
-                                                              survey: Survey.onboard.researchKitTask(),
-                                                              extractOutcome: { _ in [OCKOutcomeValue(Date())] }
+                                                              survey: onboardSurvey.researchKitTask(),
+                                                              extractOutcome: onboardSurvey.extractAnswersFromSurvey
                                 )
+                onboardCard.view.tintColor = TintColorKey.defaultValue
+                if let carekitView = onboardCard.view as? OCKView {
+                    carekitView.customStyle = CustomStylerKey.defaultValue
+                }
                 onboardCard.surveyDelegate = self
 
                 listViewController.appendViewController(
@@ -309,6 +314,7 @@ class CareViewController: OCKDailyPageViewController {
                                                          extractOutcome: surveyTask.survey.extractAnswersFromSurvey
 
             )
+            surveyCard.view.tintColor = TintColorKey.defaultValue
             surveyCard.surveyDelegate = self
             return [surveyCard]
         default:

@@ -148,8 +148,7 @@ extension Survey {
     }
 
     static func extractAnswersFromOnboardSurvey(_ result: ORKTaskResult) -> [OCKOutcomeValue]? {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            NotificationCenter.default.post(.init(name: Notification.Name(rawValue: Constants.requestSync)))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             Utility.requestHealthKitPermissions()
         }
         return [OCKOutcomeValue(Date())]
