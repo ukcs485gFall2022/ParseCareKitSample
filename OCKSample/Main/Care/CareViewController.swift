@@ -137,13 +137,12 @@ class CareViewController: OCKDailyPageViewController {
         Task {
             guard await checkIfOnboardingIsComplete() else {
                 let onboardSurvey = Survey.onboard
-                let onboardCard = OCKSurveyTaskViewController(taskID: onboardSurvey.identifier(),
-                                                              eventQuery: OCKEventQuery(for: date),
-                                                              storeManager: self.storeManager,
-                                                              survey: onboardSurvey.researchKitTask(),
-                                                              extractOutcome: onboardSurvey.extractAnswersFromSurvey
+                let onboardCard = SurveyTaskViewController(taskID: onboardSurvey.identifier(),
+                                                           eventQuery: OCKEventQuery(for: date),
+                                                           storeManager: self.storeManager,
+                                                           survey: onboardSurvey.researchKitTask(),
+                                                           extractOutcome: onboardSurvey.extractAnswersFromSurvey
                                 )
-                onboardCard.view.tintColor = TintColorKey.defaultValue
                 if let carekitView = onboardCard.view as? OCKView {
                     carekitView.customStyle = CustomStylerKey.defaultValue
                 }
@@ -306,15 +305,14 @@ class CareViewController: OCKDailyPageViewController {
                 return nil
             }
 
-            let surveyCard = OCKSurveyTaskViewController(taskID: surveyTask.survey.identifier(),
-                                                         eventQuery: OCKEventQuery(for: date),
-                                                         storeManager: self.storeManager,
-                                                         survey: surveyTask.survey.researchKitTask(),
-                                                         viewSynchronizer: SurveyViewSynchronizer(),
-                                                         extractOutcome: surveyTask.survey.extractAnswersFromSurvey
+            let surveyCard = SurveyTaskViewController(taskID: surveyTask.survey.identifier(),
+                                                      eventQuery: OCKEventQuery(for: date),
+                                                      storeManager: self.storeManager,
+                                                      survey: surveyTask.survey.researchKitTask(),
+                                                      viewSynchronizer: SurveyViewSynchronizer(),
+                                                      extractOutcome: surveyTask.survey.extractAnswersFromSurvey
 
             )
-            surveyCard.view.tintColor = TintColorKey.defaultValue
             surveyCard.surveyDelegate = self
             return [surveyCard]
         default:
