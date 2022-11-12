@@ -424,10 +424,10 @@
 		7054471D291EE1F900743ABD /* Surveys */ = {
 			isa = PBXGroup;
 			children = (
+				70C4D3E2291EA3BE0099E9E0 /* Survey.swift */,
 				70544720291EE25400743ABD /* Survey+CheckIn.swift */,
 				7054471E291EE23C00743ABD /* Survey+Onboarding.swift */,
 				70544723291EFFD500743ABD /* Survey+RangeOfMotion.swift */,
-				70C4D3E2291EA3BE0099E9E0 /* Survey.swift */,
 			);
 			path = Surveys;
 			sourceTree = "<group>";
