@@ -11,6 +11,13 @@ import CareKitStore
 import ResearchKit
 
 extension Survey {
+    /*
+     TODO: Modify the onboarding so it properly represents the
+     usecase of your application. Changes should be made to
+     each of the steps in this type method. For example, you
+     should change: title, detailText, image, and imageContentMode,
+     and learnMoreItem.
+     */
     static func onboarding() -> ORKTask {
 
         // The Welcome Instruction step.
@@ -79,17 +86,19 @@ extension Survey {
         webViewStep.showSignatureAfterContent = true
 
         // The Request Permissions step.
+        // TODO: Set these to HealthKit info you want to display
+        // by default.
         let healthKitTypesToWrite: Set<HKSampleType> = [
-            HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!,
-            HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
-            HKObjectType.workoutType()
+            .quantityType(forIdentifier: .bodyMassIndex)!,
+            .quantityType(forIdentifier: .activeEnergyBurned)!,
+            .workoutType()
         ]
 
         let healthKitTypesToRead: Set<HKObjectType> = [
-            HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!,
-            HKObjectType.workoutType(),
-            HKObjectType.quantityType(forIdentifier: .appleStandTime)!,
-            HKObjectType.quantityType(forIdentifier: .appleExerciseTime)!
+            .characteristicType(forIdentifier: .dateOfBirth)!,
+            .workoutType(),
+            .quantityType(forIdentifier: .appleStandTime)!,
+            .quantityType(forIdentifier: .appleExerciseTime)!
         ]
 
         let healthKitPermissionType = ORKHealthKitPermissionType(
@@ -139,6 +148,10 @@ extension Survey {
     }
 
     static func extractAnswersFromOnboardSurvey(_ result: ORKTaskResult) -> [OCKOutcomeValue]? {
-        [OCKOutcomeValue(Date())]
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            NotificationCenter.default.post(.init(name: Notification.Name(rawValue: Constants.requestSync)))
+            Utility.requestHealthKitPermissions()
+        }
+        return [OCKOutcomeValue(Date())]
     }
 }
