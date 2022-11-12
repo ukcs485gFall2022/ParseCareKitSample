@@ -38,7 +38,7 @@
 		7054471C291EE1AB00743ABD /* SurveyViewSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7054471B291EE1AB00743ABD /* SurveyViewSynchronizer.swift */; };
 		7054471F291EE23C00743ABD /* Survey+Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7054471E291EE23C00743ABD /* Survey+Onboarding.swift */; };
 		70544721291EE25400743ABD /* Survey+CheckIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70544720291EE25400743ABD /* Survey+CheckIn.swift */; };
-		70544722291EEDC400743ABD /* Surveys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C4D3E2291EA3BE0099E9E0 /* Surveys.swift */; };
+		70544722291EEDC400743ABD /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C4D3E2291EA3BE0099E9E0 /* Survey.swift */; };
 		70544724291EFFD500743ABD /* Survey+RangeOfMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70544723291EFFD500743ABD /* Survey+RangeOfMotion.swift */; };
 		70736CA6291A0BAF007D5604 /* OCKBiologicalSex+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70736CA5291A0BAF007D5604 /* OCKBiologicalSex+Hashable.swift */; };
 		70736CA7291A0BAF007D5604 /* OCKBiologicalSex+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70736CA5291A0BAF007D5604 /* OCKBiologicalSex+Hashable.swift */; };
@@ -65,7 +65,7 @@
 		70A98D68278A2DF1009B58F2 /* TintColorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918FDEC2271B4E950045A0EF /* TintColorKey.swift */; };
 		70C0D474279BA492003DA141 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91693821271B897200A634ED /* Utility.swift */; };
 		70C4D3E1291EA36D0099E9E0 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C4D3E0291EA36D0099E9E0 /* Consent.swift */; };
-		70C4D3E3291EA3BE0099E9E0 /* Surveys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C4D3E2291EA3BE0099E9E0 /* Surveys.swift */; };
+		70C4D3E3291EA3BE0099E9E0 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C4D3E2291EA3BE0099E9E0 /* Survey.swift */; };
 		70CF66E428E1E74C00FAE977 /* TintColorFlipKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF66E328E1E74C00FAE977 /* TintColorFlipKey.swift */; };
 		70CF66E528E1E74C00FAE977 /* TintColorFlipKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF66E328E1E74C00FAE977 /* TintColorFlipKey.swift */; };
 		70DFD80B2567074500B9DB12 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BD2B1E254B44DB0030B424 /* LoginView.swift */; };
@@ -234,7 +234,7 @@
 		7083CFB12919B5CB00CACC47 /* OCKSynchronizedStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCKSynchronizedStoreManager.swift; sourceTree = "<group>"; };
 		70BD2B1E254B44DB0030B424 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		70C4D3E0291EA36D0099E9E0 /* Consent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consent.swift; sourceTree = "<group>"; };
-		70C4D3E2291EA3BE0099E9E0 /* Surveys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Surveys.swift; sourceTree = "<group>"; };
+		70C4D3E2291EA3BE0099E9E0 /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		70CF66E328E1E74C00FAE977 /* TintColorFlipKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TintColorFlipKey.swift; sourceTree = "<group>"; };
 		70F03A902786073300E5AFB4 /* CareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareViewModel.swift; sourceTree = "<group>"; };
 		70F03A922786087800E5AFB4 /* OCKAnyEvent+CustomStringConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCKAnyEvent+CustomStringConvertable.swift"; sourceTree = "<group>"; };
@@ -427,7 +427,7 @@
 				70544720291EE25400743ABD /* Survey+CheckIn.swift */,
 				7054471E291EE23C00743ABD /* Survey+Onboarding.swift */,
 				70544723291EFFD500743ABD /* Survey+RangeOfMotion.swift */,
-				70C4D3E2291EA3BE0099E9E0 /* Surveys.swift */,
+				70C4D3E2291EA3BE0099E9E0 /* Survey.swift */,
 			);
 			path = Surveys;
 			sourceTree = "<group>";
@@ -872,7 +872,7 @@
 				70F921B327CAC16E00368CEC /* LocalSyncSessionDelegate.swift in Sources */,
 				B511F09428F60B060078C7BB /* AppearanceStyle.swift in Sources */,
 				70221F3928D8C10800971195 /* StoreManagerKey.swift in Sources */,
-				70544722291EEDC400743ABD /* Surveys.swift in Sources */,
+				70544722291EEDC400743ABD /* Survey.swift in Sources */,
 				70544716291EE05900743ABD /* OCKAnyEvent.swift in Sources */,
 				70A98D63278A268B009B58F2 /* ColorStyler.swift in Sources */,
 				918FDEB8271B49060045A0EF /* Logger.swift in Sources */,
@@ -924,7 +924,7 @@
 				70736CB8291AB293007D5604 /* ProfileImageView.swift in Sources */,
 				70F0EFEA28C2EE6C0005B5A2 /* AppDelegateKey.swift in Sources */,
 				7036E64025717F85006E9A3C /* Constants.swift in Sources */,
-				70C4D3E3291EA3BE0099E9E0 /* Surveys.swift in Sources */,
+				70C4D3E3291EA3BE0099E9E0 /* Survey.swift in Sources */,
 				918FDEBC271B4E4A0045A0EF /* Calendar+Dates.swift in Sources */,
 				7083CFB22919B5CB00CACC47 /* OCKSynchronizedStoreManager.swift in Sources */,
 				70F03AA127860AB700E5AFB4 /* OCKOutcome.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  Surveys.swift
+//  Survey.swift
 //  OCKSample
 //
 //  Created by Corey Baker on 11/11/22.
