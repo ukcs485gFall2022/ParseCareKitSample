@@ -136,12 +136,12 @@ class CareViewController: OCKDailyPageViewController {
                                           prepare listViewController: OCKListViewController, for date: Date) {
         Task {
             guard await checkIfOnboardingIsComplete() else {
-                let onboardSurvey = Survey.onboard
+                let onboardSurvey = Onboard()
                 let onboardCard = SurveyTaskViewController(taskID: onboardSurvey.identifier(),
                                                            eventQuery: OCKEventQuery(for: date),
                                                            storeManager: self.storeManager,
-                                                           survey: onboardSurvey.researchKitTask(),
-                                                           extractOutcome: onboardSurvey.extractAnswersFromSurvey
+                                                           survey: onboardSurvey.createSurvey(),
+                                                           extractOutcome: onboardSurvey.extractAnswers
                                 )
                 if let carekitView = onboardCard.view as? OCKView {
                     carekitView.customStyle = CustomStylerKey.defaultValue
@@ -305,12 +305,12 @@ class CareViewController: OCKDailyPageViewController {
                 return nil
             }
 
-            let surveyCard = SurveyTaskViewController(taskID: surveyTask.survey.identifier(),
+            let surveyCard = SurveyTaskViewController(taskID: surveyTask.survey.type().identifier(),
                                                       eventQuery: OCKEventQuery(for: date),
                                                       storeManager: self.storeManager,
-                                                      survey: surveyTask.survey.researchKitTask(),
+                                                      survey: surveyTask.survey.type().createSurvey(),
                                                       viewSynchronizer: SurveyViewSynchronizer(),
-                                                      extractOutcome: surveyTask.survey.extractAnswersFromSurvey
+                                                      extractOutcome: surveyTask.survey.type().extractAnswers
 
             )
             surveyCard.surveyDelegate = self
@@ -339,7 +339,7 @@ class CareViewController: OCKDailyPageViewController {
         do {
             let tasks = try await storeManager.store.fetchAnyTasks(query: query)
             // Remove onboarding tasks from array
-            return tasks.filter { $0.id != Survey.onboard.identifier() }
+            return tasks.filter { $0.id != Onboard.identifier() }
         } catch {
             Logger.feed.error("\(error.localizedDescription, privacy: .public)")
             return []
@@ -349,7 +349,7 @@ class CareViewController: OCKDailyPageViewController {
     @MainActor
     private func checkIfOnboardingIsComplete() async -> Bool {
         var query = OCKOutcomeQuery()
-        query.taskIDs = [Survey.onboard.identifier()]
+        query.taskIDs = [Onboard.identifier()]
 
         guard let store = AppDelegateKey.defaultValue?.store else {
             Logger.feed.error("CareKit store could not be unwrapped")

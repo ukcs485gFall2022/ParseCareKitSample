@@ -1,5 +1,5 @@
 //
-//  Survey+Onboarding.swift
+//  Onboarding.swift
 //  OCKSample
 //
 //  Created by Corey Baker on 11/11/22.
@@ -8,9 +8,18 @@
 
 import Foundation
 import CareKitStore
+#if canImport(ResearchKit)
 import ResearchKit
+#endif
 
-extension Survey {
+struct Onboard: Surveyable {
+    static var surveyType: Survey {
+        Survey.onboard
+    }
+}
+
+#if canImport(ResearchKit)
+extension Onboard {
     /*
      TODO: Modify the onboarding so it properly represents the
      usecase of your application. Changes should be made to
@@ -18,11 +27,10 @@ extension Survey {
      should change: title, detailText, image, and imageContentMode,
      and learnMoreItem.
      */
-    static func onboarding() -> ORKTask {
-
+    func createSurvey() -> ORKTask {
         // The Welcome Instruction step.
         let welcomeInstructionStep = ORKInstructionStep(
-            identifier: "\(Self.onboard.identifier()).welcome"
+            identifier: "\(Self.identifier()).welcome"
         )
 
         welcomeInstructionStep.title = "Welcome!"
@@ -32,7 +40,7 @@ extension Survey {
 
         // The Informed Consent Instruction step.
         let studyOverviewInstructionStep = ORKInstructionStep(
-            identifier: "\(Self.onboard.identifier()).overview"
+            identifier: "\(Self.identifier()).overview"
         )
 
         studyOverviewInstructionStep.title = "Before You Join"
@@ -79,7 +87,7 @@ extension Survey {
 
         // The Signature step (using WebView).
         let webViewStep = ORKWebViewStep(
-            identifier: "\(Self.onboard.identifier()).signatureCapture",
+            identifier: "\(Self.identifier()).signatureCapture",
             html: informedConsentHTML
         )
 
@@ -113,7 +121,7 @@ extension Survey {
         let motionPermissionType = ORKMotionActivityPermissionType()
 
         let requestPermissionsStep = ORKRequestPermissionsStep(
-            identifier: "\(Self.onboard.identifier()).requestPermissionsStep",
+            identifier: "\(Self.identifier()).requestPermissionsStep",
             permissionTypes: [
                 healthKitPermissionType,
                 notificationsPermissionType,
@@ -127,7 +135,7 @@ extension Survey {
 
         // Completion Step
         let completionStep = ORKCompletionStep(
-            identifier: "\(Self.onboard.identifier()).completionStep"
+            identifier: "\(Self.identifier()).completionStep"
         )
 
         completionStep.title = "Enrollment Complete"
@@ -135,7 +143,7 @@ extension Survey {
         completionStep.text = "Thank you for enrolling in this study. Your participation will contribute to meaningful research!"
 
         let surveyTask = ORKOrderedTask(
-            identifier: Self.onboard.identifier(),
+            identifier: Self.identifier(),
             steps: [
                 welcomeInstructionStep,
                 studyOverviewInstructionStep,
@@ -147,10 +155,11 @@ extension Survey {
         return surveyTask
     }
 
-    static func extractAnswersFromOnboardSurvey(_ result: ORKTaskResult) -> [OCKOutcomeValue]? {
+    func extractAnswers(_ result: ORKTaskResult) -> [CareKitStore.OCKOutcomeValue]? {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             Utility.requestHealthKitPermissions()
         }
         return [OCKOutcomeValue(Date())]
     }
 }
+#endif

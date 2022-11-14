@@ -206,7 +206,7 @@ extension OCKStore {
         )
 
         var onboardTask = OCKTask(
-            id: Survey.onboard.identifier(),
+            id: Onboard.identifier(),
             title: "Onboard",
             carePlanUUID: carePlanUUID,
             schedule: onboardSchedule
@@ -227,7 +227,7 @@ extension OCKStore {
         )
 
         var checkInTask = OCKTask(
-            id: Survey.checkIn.identifier(),
+            id: CheckIn.identifier(),
             title: "Check In",
             carePlanUUID: carePlanUUID,
             schedule: checkInSchedule
@@ -272,7 +272,7 @@ extension OCKStore {
         )
 
         var rangeOfMotionTask = OCKTask(
-            id: Survey.rangeOfMotion.identifier(),
+            id: RangeOfMotion.identifier(),
             title: "Range Of Motion",
             carePlanUUID: carePlanUUID,
             schedule: rangeOfMotionCheckSchedule

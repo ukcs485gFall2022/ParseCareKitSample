@@ -68,7 +68,9 @@ class SurveyTaskViewController: OCKSurveyTaskViewController {
 
         surveyViewController.outputDirectory = directory
         surveyViewController.delegate = self
-        surveyViewController.view.tintColor = view.tintColor
+        if self.view.window?.tintColor == nil {
+            surveyViewController.view.tintColor = view.tintColor
+        }
         present(surveyViewController, animated: true, completion: nil)
     }
 }

@@ -18,33 +18,14 @@ enum Survey: String, CaseIterable, Identifiable {
     case checkIn = "Check In"
     case rangeOfMotion = "Range of Motion"
 
-    func identifier() -> String {
-        self.rawValue.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-}
-
-#if canImport(ResearchKit)
-extension Survey {
-    func researchKitTask() -> ORKTask {
+    func type() -> Surveyable {
         switch self {
         case .onboard:
-            return Self.onboarding()
+            return Onboard()
         case .checkIn:
-            return Self.checkIn()
+            return CheckIn()
         case .rangeOfMotion:
-            return Self.rangeOfMotion()
-        }
-    }
-
-    func extractAnswersFromSurvey(_ result: ORKTaskResult) -> [OCKOutcomeValue]? {
-        switch self {
-        case .onboard:
-            return Self.extractAnswersFromOnboardSurvey(result)
-        case .checkIn:
-            return Self.extractAnswersFromCheckInSurvey(result)
-        case .rangeOfMotion:
-            return Self.extractAnswersFromRangeOfMotionSurvey(result)
+            return RangeOfMotion()
         }
     }
 }
-#endif
