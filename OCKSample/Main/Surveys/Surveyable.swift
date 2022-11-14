@@ -12,11 +12,18 @@ import CareKitStore
 import ResearchKit
 #endif
 
+/**
+ Correlates a CareKit task with a ResearchKit task.
+ */
 protocol Surveyable {
+    /// The type of survey.
     static var surveyType: Survey { get }
+    /// The unique identifier of the survey.
     static func identifier() -> String
     #if canImport(ResearchKit)
+    /// Creates the survey.
     func createSurvey() -> ORKTask
+    /// Extracts the answers from the survey.
     func extractAnswers(_ result: ORKTaskResult) -> [OCKOutcomeValue]?
     #endif
 }
@@ -26,6 +33,7 @@ extension Surveyable {
         surveyType.rawValue.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
+    /// The unique identifier of the survey.
     func identifier() -> String {
         Self.identifier()
     }

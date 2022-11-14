@@ -30,7 +30,7 @@ extension Onboard {
     func createSurvey() -> ORKTask {
         // The Welcome Instruction step.
         let welcomeInstructionStep = ORKInstructionStep(
-            identifier: "\(Self.identifier()).welcome"
+            identifier: "\(identifier()).welcome"
         )
 
         welcomeInstructionStep.title = "Welcome!"
@@ -40,7 +40,7 @@ extension Onboard {
 
         // The Informed Consent Instruction step.
         let studyOverviewInstructionStep = ORKInstructionStep(
-            identifier: "\(Self.identifier()).overview"
+            identifier: "\(identifier()).overview"
         )
 
         studyOverviewInstructionStep.title = "Before You Join"
@@ -87,7 +87,7 @@ extension Onboard {
 
         // The Signature step (using WebView).
         let webViewStep = ORKWebViewStep(
-            identifier: "\(Self.identifier()).signatureCapture",
+            identifier: "\(identifier()).signatureCapture",
             html: informedConsentHTML
         )
 
@@ -121,7 +121,7 @@ extension Onboard {
         let motionPermissionType = ORKMotionActivityPermissionType()
 
         let requestPermissionsStep = ORKRequestPermissionsStep(
-            identifier: "\(Self.identifier()).requestPermissionsStep",
+            identifier: "\(identifier()).requestPermissionsStep",
             permissionTypes: [
                 healthKitPermissionType,
                 notificationsPermissionType,
@@ -135,7 +135,7 @@ extension Onboard {
 
         // Completion Step
         let completionStep = ORKCompletionStep(
-            identifier: "\(Self.identifier()).completionStep"
+            identifier: "\(identifier()).completionStep"
         )
 
         completionStep.title = "Enrollment Complete"
@@ -143,7 +143,7 @@ extension Onboard {
         completionStep.text = "Thank you for enrolling in this study. Your participation will contribute to meaningful research!"
 
         let surveyTask = ORKOrderedTask(
-            identifier: Self.identifier(),
+            identifier: identifier(),
             steps: [
                 welcomeInstructionStep,
                 studyOverviewInstructionStep,

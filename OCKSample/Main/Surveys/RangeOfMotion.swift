@@ -22,13 +22,13 @@ extension RangeOfMotion {
     func createSurvey() -> ORKTask {
 
         let rangeOfMotionOrderedTask = ORKOrderedTask.kneeRangeOfMotionTask(
-            withIdentifier: Self.identifier(),
+            withIdentifier: identifier(),
             limbOption: .left,
             intendedUseDescription: nil,
             options: [.excludeConclusion]
         )
 
-        let completionStep = ORKCompletionStep(identifier: "\(Self.identifier()).completion")
+        let completionStep = ORKCompletionStep(identifier: "\(identifier()).completion")
         completionStep.title = "All done!"
         completionStep.detailText = "We know the road to recovery can be tough. Keep up the good work!"
 

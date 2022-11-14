@@ -76,7 +76,7 @@ extension CheckIn {
         formStep.isOptional = false
 
         let surveyTask = ORKOrderedTask(
-            identifier: Self.identifier(),
+            identifier: identifier(),
             steps: [formStep]
         )
         return surveyTask
