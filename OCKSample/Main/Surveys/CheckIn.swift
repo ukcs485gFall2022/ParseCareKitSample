@@ -35,7 +35,7 @@ extension CheckIn {
 
         let painAnswerFormat = ORKAnswerFormat.scale(
             withMaximumValue: 10,
-            minimumValue: 1,
+            minimumValue: 0,
             defaultValue: 0,
             step: 1,
             vertical: false,
