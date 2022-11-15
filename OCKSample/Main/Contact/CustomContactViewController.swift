@@ -9,6 +9,7 @@
 import UIKit
 import CareKitStore
 import CareKit
+import CareKitUI
 import Contacts
 import ContactsUI
 import ParseSwift
@@ -66,6 +67,7 @@ class CustomContactViewController: OCKListViewController {
     @objc private func presentContactsListViewController() {
 
         let contactPicker = CNContactPickerViewController()
+        contactPicker.view.tintColor = self.view.tintColor
         contactPicker.delegate = self
         contactPicker.predicateForEnablingContact = NSPredicate(
           format: "phoneNumbers.@count > 0")
@@ -115,6 +117,10 @@ class CustomContactViewController: OCKListViewController {
         for contact in contacts {
             let contactViewController = OCKSimpleContactViewController(contact: contact,
                                                                        storeManager: storeManager)
+            contactViewController.view.tintColor = self.view.tintColor
+            if let carekitView = contactViewController.view as? OCKView {
+                carekitView.customStyle = CustomStylerKey.defaultValue
+            }
             contactViewController.delegate = self.contactDelegate
             self.appendViewController(contactViewController, animated: false)
         }
