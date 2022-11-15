@@ -12,15 +12,18 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        destination: ['-destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max test', 'CODE_SIGNING_ALLOWED="NO"']
+        destination: ['-destination platform\=iOS\ Simulator,name\=iPhone\ 14\ Pro\ Max test', 'CODE_SIGNING_ALLOWED="NO"']
         scheme: ['OCKSample', 'OCKWatchSample']
         exclude:
-        - destination: '-destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max test'
+        - destination: '-destination platform\=iOS\ Simulator,name\=iPhone\ 14\ Pro\ Max test'
           scheme: 'OCKWatchSample'
         - destination: 'CODE_SIGNING_ALLOWED="NO"'
           scheme: 'OCKSample'
     steps:
     - uses: actions/checkout@v2
+    - name: Install Submodules
+      run: |
+        git submodule update --init --recursive
     - name: Build-Test
       run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -project OCKSample.xcodeproj -scheme ${{ matrix.scheme }} ${{ matrix.destination }} | xcpretty
       env:
