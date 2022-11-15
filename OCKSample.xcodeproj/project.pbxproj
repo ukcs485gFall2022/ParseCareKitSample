@@ -38,7 +38,6 @@
 		703A906C2922F3A1006E3C70 /* Onboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7054471E291EE23C00743ABD /* Onboard.swift */; };
 		703A906D2922F3A1006E3C70 /* CheckIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70544720291EE25400743ABD /* CheckIn.swift */; };
 		703A906E2922F469006E3C70 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C4D3E2291EA3BE0099E9E0 /* Survey.swift */; };
-		7054470F291ED44200743ABD /* ParseCareKit-heroku.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7054470E291ED44200743ABD /* ParseCareKit-heroku.plist */; };
 		70544715291EE05900743ABD /* OCKAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70544714291EE05900743ABD /* OCKAnyEvent.swift */; };
 		70544716291EE05900743ABD /* OCKAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70544714291EE05900743ABD /* OCKAnyEvent.swift */; };
 		7054471C291EE1AB00743ABD /* SurveyViewSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7054471B291EE1AB00743ABD /* SurveyViewSynchronizer.swift */; };
@@ -218,7 +217,6 @@
 		7036E516256F2413006E9A3C /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		7036E63F25717F85006E9A3C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		703A90652922EB45006E3C70 /* Surveyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Surveyable.swift; sourceTree = "<group>"; };
-		7054470E291ED44200743ABD /* ParseCareKit-heroku.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ParseCareKit-heroku.plist"; sourceTree = "<group>"; };
 		70544714291EE05900743ABD /* OCKAnyEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCKAnyEvent.swift; sourceTree = "<group>"; };
 		7054471B291EE1AB00743ABD /* SurveyViewSynchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewSynchronizer.swift; sourceTree = "<group>"; };
 		7054471E291EE23C00743ABD /* Onboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard.swift; sourceTree = "<group>"; };
@@ -518,7 +516,6 @@
 			children = (
 				E72B2C15226939E4009A9438 /* Info.plist */,
 				91AD922124A45A3900925D4D /* ParseCareKit.plist */,
-				7054470E291ED44200743ABD /* ParseCareKit-heroku.plist */,
 				E7C4CA0A22809AD500ECC3D7 /* Assets.xcassets */,
 				E72B2C12226939E4009A9438 /* LaunchScreen.storyboard */,
 				707CC70E254DA91900116728 /* Localization */,
@@ -832,7 +829,6 @@
 				E7C4CA0B22809AD500ECC3D7 /* Assets.xcassets in Resources */,
 				91AD922224A45A3900925D4D /* ParseCareKit.plist in Resources */,
 				91AD922424A461D200925D4D /* README.md in Resources */,
-				7054470F291ED44200743ABD /* ParseCareKit-heroku.plist in Resources */,
 				91693820271B80EA00A634ED /* CONTRIBUTING.md in Resources */,
 				E72B2C14226939E4009A9438 /* LaunchScreen.storyboard in Resources */,
 				707CC716254DA91900116728 /* Localizable.stringsdict in Resources */,
