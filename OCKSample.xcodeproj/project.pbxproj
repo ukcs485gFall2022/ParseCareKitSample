@@ -45,7 +45,6 @@
 		7054471F291EE23C00743ABD /* Onboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7054471E291EE23C00743ABD /* Onboard.swift */; };
 		70544721291EE25400743ABD /* CheckIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70544720291EE25400743ABD /* CheckIn.swift */; };
 		70544724291EFFD500743ABD /* RangeOfMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70544723291EFFD500743ABD /* RangeOfMotion.swift */; };
-		70544726291FEA9200743ABD /* SurveyTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70544725291FEA9200743ABD /* SurveyTaskViewController.swift */; };
 		70736CA6291A0BAF007D5604 /* OCKBiologicalSex+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70736CA5291A0BAF007D5604 /* OCKBiologicalSex+Hashable.swift */; };
 		70736CA7291A0BAF007D5604 /* OCKBiologicalSex+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70736CA5291A0BAF007D5604 /* OCKBiologicalSex+Hashable.swift */; };
 		70736CA9291A13B9007D5604 /* CustomContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70736CA8291A13B9007D5604 /* CustomContactViewController.swift */; };
@@ -225,7 +224,6 @@
 		7054471E291EE23C00743ABD /* Onboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard.swift; sourceTree = "<group>"; };
 		70544720291EE25400743ABD /* CheckIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckIn.swift; sourceTree = "<group>"; };
 		70544723291EFFD500743ABD /* RangeOfMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeOfMotion.swift; sourceTree = "<group>"; };
-		70544725291FEA9200743ABD /* SurveyTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyTaskViewController.swift; sourceTree = "<group>"; };
 		705B22BE25E2C1A700C472AC /* OCKWatchSample Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "OCKWatchSample Extension.entitlements"; sourceTree = "<group>"; };
 		70736CA5291A0BAF007D5604 /* OCKBiologicalSex+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCKBiologicalSex+Hashable.swift"; sourceTree = "<group>"; };
 		70736CA8291A13B9007D5604 /* CustomContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomContactViewController.swift; sourceTree = "<group>"; };
@@ -348,7 +346,6 @@
 		70221F2B28D7C7C600971195 /* CustomCards */ = {
 			isa = PBXGroup;
 			children = (
-				70544725291FEA9200743ABD /* SurveyTaskViewController.swift */,
 				7054471B291EE1AB00743ABD /* SurveyViewSynchronizer.swift */,
 				E7C37848228F887800E982D8 /* TipView.swift */,
 			);
@@ -945,7 +942,6 @@
 				7036E4CE256E9A0C006E9A3C /* ContactView.swift in Sources */,
 				703A90662922EB45006E3C70 /* Surveyable.swift in Sources */,
 				70F03A972786098F00E5AFB4 /* OCKStore.swift in Sources */,
-				70544726291FEA9200743ABD /* SurveyTaskViewController.swift in Sources */,
 				70DFD80B2567074500B9DB12 /* LoginView.swift in Sources */,
 				70736CA6291A0BAF007D5604 /* OCKBiologicalSex+Hashable.swift in Sources */,
 				70F03AA827860E7700E5AFB4 /* FontColorKey.swift in Sources */,
