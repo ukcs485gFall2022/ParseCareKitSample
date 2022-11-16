@@ -95,7 +95,6 @@ class MyContactViewController: OCKListViewController {
         for contact in self.contacts {
             let contactViewController = OCKDetailedContactViewController(contact: contact,
                                                                          storeManager: storeManager)
-            contactViewController.view.tintColor = self.view.tintColor
             if let carekitView = contactViewController.view as? OCKView {
                 carekitView.customStyle = CustomStylerKey.defaultValue
             }
