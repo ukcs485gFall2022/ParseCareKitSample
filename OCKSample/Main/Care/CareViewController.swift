@@ -306,15 +306,55 @@ class CareViewController: OCKDailyPageViewController {
                 Logger.feed.error("Can only use a survey for an \"OCKTask\", not \(task.id)")
                 return nil
             }
-
-            let surveyCard = OCKSurveyTaskViewController(taskID: surveyTask.survey.type().identifier(),
+            var cards = [UIViewController]()
+            let surveyTaskID = surveyTask.survey.type().identifier()
+            let surveyCard = OCKSurveyTaskViewController(taskID: surveyTaskID,
                                                          eventQuery: OCKEventQuery(for: date),
                                                          storeManager: self.storeManager,
                                                          survey: surveyTask.survey.type().createSurvey(),
                                                          viewSynchronizer: SurveyViewSynchronizer(),
                                                          extractOutcome: surveyTask.survey.type().extractAnswers)
             surveyCard.surveyDelegate = self
-            return [surveyCard]
+            cards.append(surveyCard)
+
+            if surveyTask.id == CheckIn.identifier() {
+                // dynamic gradient colors
+                let meanGradientStart = UIColor { traitCollection -> UIColor in
+                    return traitCollection.userInterfaceStyle == .light ? #colorLiteral(red: 0.06253327429, green: 0.6597633362, blue: 0.8644603491, alpha: 1) : #colorLiteral(red: 0, green: 0.2858072221, blue: 0.6897063851, alpha: 1)
+                }
+                let meanGradientEnd = UIColor { traitCollection -> UIColor in
+                    return traitCollection.userInterfaceStyle == .light ? #colorLiteral(red: 0, green: 0.2858072221, blue: 0.6897063851, alpha: 1) : #colorLiteral(red: 0.06253327429, green: 0.6597633362, blue: 0.8644603491, alpha: 1)
+                }
+
+                // Create a plot comparing mean to median.
+                let meanDataSeries = OCKDataSeriesConfiguration(
+                    taskID: surveyTaskID,
+                    legendTitle: "Mean",
+                    gradientStartColor: meanGradientStart,
+                    gradientEndColor: meanGradientEnd,
+                    markerSize: 10,
+                    eventAggregator: .aggregatorMean(CheckIn.sleepItemIdentifier))
+
+                let medianDataSeries = OCKDataSeriesConfiguration(
+                    taskID: surveyTaskID,
+                    legendTitle: "Median",
+                    gradientStartColor: .systemGray2,
+                    gradientEndColor: .systemGray,
+                    markerSize: 10,
+                    eventAggregator: .aggregatorMedian(CheckIn.sleepItemIdentifier))
+
+                let insightsCard = OCKCartesianChartViewController(
+                    plotType: .line,
+                    selectedDate: date,
+                    configurations: [meanDataSeries, medianDataSeries],
+                    storeManager: self.storeManager)
+
+                insightsCard.chartView.headerView.titleLabel.text = "Sleep Mean & Median"
+                insightsCard.chartView.headerView.detailLabel.text = "This Week"
+                insightsCard.chartView.headerView.accessibilityLabel = "Mean & Median, This Week"
+                cards.append(insightsCard)
+            }
+            return cards
         default:
             // Check if a healthKit task
             guard task is OCKHealthKitTask else {
