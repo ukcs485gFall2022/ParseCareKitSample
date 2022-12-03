@@ -7,20 +7,27 @@ on:
 env:
     CI_XCODE: '/Applications/Xcode_14.1.app/Contents/Developer'
 
+concurrency:
+   group: ${{ github.workflow }}-${{ github.ref }}
+   cancel-in-progress: true
+
 jobs:
   test:
     runs-on: macos-latest
     strategy:
       matrix:
-        destination: ['-destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max test', 'CODE_SIGNING_ALLOWED="NO"']
+        destination: ['-destination platform\=iOS\ Simulator,name\=iPhone\ 14\ Pro\ Max test', 'CODE_SIGNING_ALLOWED="NO"']
         scheme: ['OCKSample', 'OCKWatchSample']
         exclude:
-        - destination: '-destination platform\=iOS\ Simulator,name\=iPhone\ 13\ Pro\ Max test'
+        - destination: '-destination platform\=iOS\ Simulator,name\=iPhone\ 14\ Pro\ Max test'
           scheme: 'OCKWatchSample'
         - destination: 'CODE_SIGNING_ALLOWED="NO"'
           scheme: 'OCKSample'
     steps:
     - uses: actions/checkout@v2
+    - name: Install Submodules
+      run: |
+        git submodule update --init --recursive
     - name: Build-Test
       run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -project OCKSample.xcodeproj -scheme ${{ matrix.scheme }} ${{ matrix.destination }} | xcpretty
       env:
