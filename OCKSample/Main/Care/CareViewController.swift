@@ -161,7 +161,7 @@ class CareViewController: OCKDailyPageViewController {
                 if Calendar.current.isDate(date, inSameDayAs: Date()) {
                     // Add a non-CareKit view into the list
                     let tipTitle = "Benefits of exercising"
-                    let tipText = "Learn how activity can promote a healthy pregnancy."
+                    // let tipText = "Learn how activity can promote a healthy pregnancy."
                     // TODO: 5 - Need to use correct initializer instead of setting properties
                     let customFeaturedView = CustomFeaturedContentView()
                     // swiftlint:disable:next line_length
@@ -214,7 +214,19 @@ class CareViewController: OCKDailyPageViewController {
                 .padding([.vertical], 20)
                 .careKitStyle(CustomStylerKey.defaultValue)
 
-            return [view.formattedHostingController()]
+            /*
+             TODO: Example of showing how to use your custom card. This
+             should be placed correctly for the final to receive credit.
+             This card currently only shows when numericProgress is selected,
+             you should add the card to the switch statement properly to
+             make it show on purpose when the card type is selected.
+            */
+            let viewModel = CustomCardViewModel(task: task,
+                                                eventQuery: .init(for: date),
+                                                storeManager: self.storeManager)
+            let customCard = CustomCardView(viewModel: viewModel)
+            return [view.formattedHostingController(),
+                    customCard.formattedHostingController()]
         case .instruction:
             return [OCKInstructionsTaskViewController(task: task,
                                                      eventQuery: .init(for: date),
