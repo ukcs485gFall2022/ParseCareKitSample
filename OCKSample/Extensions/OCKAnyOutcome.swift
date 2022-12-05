@@ -32,4 +32,37 @@ extension OCKAnyOutcome {
         }
         return stringValues
     }
+
+    func sortedOutcomeValuesByRecency() -> Self {
+        guard !self.values.isEmpty else { return self }
+        var newOutcome = self
+        let sortedValues = newOutcome.values.sorted {
+            $0.createdDate > $1.createdDate
+        }
+
+        newOutcome.values = sortedValues
+        return newOutcome
+    }
+
+    func sortedOutcomeValues() -> Self {
+        guard !self.values.isEmpty else { return self }
+        var newOutcome = self
+        let sortedValues = newOutcome.values.sorted {
+            if let value0 = $0.dateValue,
+               let value1 = $1.dateValue {
+                return value0 > value1
+            } else if let value0 = $0.integerValue,
+                      let value1 = $1.integerValue {
+                return value0 > value1
+            } else if let value0 = $0.doubleValue,
+                      let value1 = $1.doubleValue {
+                return value0 > value1
+            } else {
+                return false
+            }
+        }
+
+        newOutcome.values = sortedValues
+        return newOutcome
+    }
 }

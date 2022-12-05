@@ -45,7 +45,7 @@ extension OCKTaskEvents {
     /// - note: If you need `OCKOutcome` or `OCKHealthKitOutcome`, you need to cast
     /// this to the respective type.
     var firstEventOutcome: OCKAnyOutcome? {
-        firstEvent?.outcome
+        firstEvent?.outcome?.sortedOutcomeValuesByRecency()
     }
 
     /// Returns **true** if the first event is complete.
@@ -71,14 +71,14 @@ extension OCKTaskEvents {
 
     /// The first event first outcome value as a **Double**.
     /// - note: Returns **0.0** if the first outcome is **nil**.
-    var firstEventOutcomeValueDouble: Double {
-        firstEventOutcomeFirstValue?.doubleValue ?? 0.0
+    var firstEventOutcomeValueDouble: Double? {
+        firstEventOutcomeFirstValue?.doubleValue
     }
 
     /// The first event first outcome value as a **String**.
     /// - note: Returns an empty **String** if the first outcome is **nil**.
-    var firstEventOutcomeValueString: String {
-        firstEventOutcomeFirstValue?.stringValue ?? ""
+    var firstEventOutcomeValueString: String? {
+        firstEventOutcomeFirstValue?.stringValue
     }
 
     /// The first event first outcome value as a **Date**.

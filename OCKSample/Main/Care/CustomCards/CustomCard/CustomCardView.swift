@@ -30,38 +30,56 @@ struct CustomCardView: View {
                         .fontWeight(.medium)
                 }
                 .foregroundColor(Color.primary)
-                Divider() */
+                */
                 // Can look through HeaderView for creating custom
                 HeaderView(title: Text(viewModel.taskEvents.firstEventTitle),
                            detail: Text(viewModel.taskEvents.firstEventDetail ?? ""))
-                HStack(alignment: .top,
+                Divider()
+                HStack(alignment: .center,
                        spacing: style.dimension.directionalInsets2.trailing) {
 
                     /*
                      // Example of custom content.
                      TODO: Remove all that you are not using.
                      */
-                    VStack(alignment: .leading) {
-                        Text("Text...")
+                    Button(action: {
+                        Task {
+                            await viewModel.action(viewModel.value)
+                        }
+                    }) {
+                        CircularCompletionView(isComplete: viewModel.taskEvents.isFirstEventComplete) {
+                            Image(systemName: "checkmark") // Can place any view type here
+                                .resizable()
+                                .padding()
+                                .frame(width: 50, height: 50) // Change size to make larger/smaller
+                        }
                     }
-
-                    CircularCompletionView(isComplete: viewModel.taskEvents.isFirstEventComplete) {
-                        Image(systemName: "checkmark") // Can place any view type here
-                            .resizable()
-                            .padding()
-                            .frame(width: 50, height: 50) // Change size to make larger/smaller
-                    }
-
                     Spacer()
 
-                    RectangularCompletionView(isComplete: viewModel.taskEvents.isFirstEventComplete) {
-                        Image(systemName: "checkmark") // Can place any view type here
-                            .resizable()
-                            .padding()
-                            .frame(width: 50, height: 50) // Change size to make larger/smaller
+                    Text("Input: ")
+                        .font(Font.headline)
+                    TextField("0.0",
+                              value: $viewModel.value,
+                              formatter: viewModel.amountFormatter)
+                        .keyboardType(.decimalPad)
+                        .font(Font.title.weight(.bold))
+                        .foregroundColor(.accentColor)
+
+                    Spacer()
+                    Button(action: {
+                        Task {
+                            await viewModel.action(viewModel.value)
+                        }
+                    }) {
+                        RectangularCompletionView(isComplete: viewModel.taskEvents.isFirstEventComplete) {
+                            Image(systemName: "checkmark") // Can place any view type here
+                                .resizable()
+                                .padding()
+                                .frame(width: 50, height: 50) // Change size to make larger/smaller
+                        }
                     }
 
-                    Text("\(viewModel.taskEvents.firstEventOutcomeValueInt)")
+                    Text(viewModel.valueForButton)
                         .multilineTextAlignment(.trailing)
                         .font(Font.title.weight(.bold))
                         .foregroundColor(.accentColor)
@@ -69,7 +87,14 @@ struct CustomCardView: View {
             }
             .padding()
         }
-        .careKitStyle(style)
+        .onReceive(viewModel.$taskEvents) { taskEvents in
+            /*
+             DO NOT CHANGE THIS. The viewModel needs help
+             from view to update "value" since taskEvents
+             can't be overriden in viewModel.
+             */
+            viewModel.checkIfValueShouldUpdate(taskEvents)
+        }
     }
 }
 

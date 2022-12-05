@@ -86,6 +86,8 @@
 		70EAC8DC293C195F0088664A /* OCKTaskEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EAC8DA293C195F0088664A /* OCKTaskEvents.swift */; };
 		70EAC8DE293C19FF0088664A /* ScheduleUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EAC8DD293C19FF0088664A /* ScheduleUtility.swift */; };
 		70EAC8DF293C19FF0088664A /* ScheduleUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EAC8DD293C19FF0088664A /* ScheduleUtility.swift */; };
+		70EAC90B293D91D30088664A /* OCKTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EAC90A293D91D30088664A /* OCKTaskController.swift */; };
+		70EAC90C293D91D30088664A /* OCKTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EAC90A293D91D30088664A /* OCKTaskController.swift */; };
 		70F03A912786073300E5AFB4 /* CareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03A902786073300E5AFB4 /* CareViewModel.swift */; };
 		70F03A932786087800E5AFB4 /* OCKAnyEvent+CustomStringConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03A922786087800E5AFB4 /* OCKAnyEvent+CustomStringConvertable.swift */; };
 		70F03A952786093B00E5AFB4 /* OCKHealthKitPassthroughStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F03A942786093B00E5AFB4 /* OCKHealthKitPassthroughStore.swift */; };
@@ -261,6 +263,7 @@
 		70EAC8D8293BFE5B0088664A /* CustomCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCardViewModel.swift; sourceTree = "<group>"; };
 		70EAC8DA293C195F0088664A /* OCKTaskEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCKTaskEvents.swift; sourceTree = "<group>"; };
 		70EAC8DD293C19FF0088664A /* ScheduleUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleUtility.swift; sourceTree = "<group>"; };
+		70EAC90A293D91D30088664A /* OCKTaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCKTaskController.swift; sourceTree = "<group>"; };
 		70F03A902786073300E5AFB4 /* CareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareViewModel.swift; sourceTree = "<group>"; };
 		70F03A922786087800E5AFB4 /* OCKAnyEvent+CustomStringConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OCKAnyEvent+CustomStringConvertable.swift"; sourceTree = "<group>"; };
 		70F03A942786093B00E5AFB4 /* OCKHealthKitPassthroughStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCKHealthKitPassthroughStore.swift; sourceTree = "<group>"; };
@@ -598,6 +601,7 @@
 				7083CFB12919B5CB00CACC47 /* OCKSynchronizedStoreManager.swift */,
 				70F03A9827860A0800E5AFB4 /* OCKSynchronizedStoreManager+Publishers.swift */,
 				7024BCDD2919F41600804EDB /* OCKTask+Custom.swift */,
+				70EAC90A293D91D30088664A /* OCKTaskController.swift */,
 				7083A855279CA40A00B3832E /* PCKUtility.swift */,
 			);
 			path = Extensions;
@@ -919,6 +923,7 @@
 				70F03AA427860B2500E5AFB4 /* OCKOutcome.swift in Sources */,
 				70F921A927CA9A4000368CEC /* CustomStylerKey.swift in Sources */,
 				703A906C2922F3A1006E3C70 /* Onboard.swift in Sources */,
+				70EAC90C293D91D30088664A /* OCKTaskController.swift in Sources */,
 				7024BCDF2919F41600804EDB /* OCKTask+Custom.swift in Sources */,
 				703A906A2922F393006E3C70 /* RangeOfMotion.swift in Sources */,
 				7075151E28DE1A8300A57A0C /* MainView.swift in Sources */,
@@ -994,6 +999,7 @@
 				70EAC8D9293BFE5B0088664A /* CustomCardViewModel.swift in Sources */,
 				70736CB2291A22C6007D5604 /* MyContactViewController.swift in Sources */,
 				B50A9990290B1C53002CD4FD /* TaskView.swift in Sources */,
+				70EAC90B293D91D30088664A /* OCKTaskController.swift in Sources */,
 				70EAC8CD293BC1C00088664A /* OCKEventAggregator.swift in Sources */,
 				7024BCDE2919F41600804EDB /* OCKTask+Custom.swift in Sources */,
 				9169381D271B650700A634ED /* ColorStyler.swift in Sources */,

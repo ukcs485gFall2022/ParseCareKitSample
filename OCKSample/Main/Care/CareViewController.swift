@@ -213,7 +213,8 @@ class CareViewController: OCKDailyPageViewController {
                 storeManager: self.storeManager)
                 .padding([.vertical], 20)
                 .careKitStyle(CustomStylerKey.defaultValue)
-
+            return [view.formattedHostingController()]
+        case .custom:
             /*
              TODO: Example of showing how to use your custom card. This
              should be placed correctly for the final to receive credit.
@@ -225,8 +226,7 @@ class CareViewController: OCKDailyPageViewController {
                                                 eventQuery: .init(for: date),
                                                 storeManager: self.storeManager)
             let customCard = CustomCardView(viewModel: viewModel)
-            return [view.formattedHostingController(),
-                    customCard.formattedHostingController()]
+            return [customCard.formattedHostingController()]
         case .instruction:
             return [OCKInstructionsTaskViewController(task: task,
                                                      eventQuery: .init(for: date),

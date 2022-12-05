@@ -16,7 +16,12 @@ import Foundation
  */
 class CardViewModel: OCKTaskController {
 
-    private var query: SynchronizedTaskQuery?
+    // MARK: Public read/write properties
+    /// The error encountered by the view model.
+    @Published public var actionError: Error?
+
+    // MARK: Public read private write properties
+    private(set) var query: SynchronizedTaskQuery?
 
     /// Create an instance for the default content. The first event that matches the
     /// provided query will be fetched from the the store and
@@ -29,7 +34,7 @@ class CardViewModel: OCKTaskController {
                      eventQuery: OCKEventQuery,
                      storeManager: OCKSynchronizedStoreManager) {
         self.init(storeManager: storeManager)
-        self.query = .taskIDs([taskID], eventQuery)
+        setQuery(.taskIDs([taskID], eventQuery))
         self.query?.perform(using: self)
     }
 
@@ -44,8 +49,12 @@ class CardViewModel: OCKTaskController {
                      eventQuery: OCKEventQuery,
                      storeManager: OCKSynchronizedStoreManager) {
         self.init(storeManager: storeManager)
-        self.query = .tasks([task], eventQuery)
+        setQuery(.tasks([task], eventQuery))
         self.query?.perform(using: self)
+    }
+
+    func setQuery(_ query: SynchronizedTaskQuery) {
+        self.query = query
     }
 }
 
