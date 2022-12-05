@@ -90,51 +90,63 @@ class InsightsViewController: OCKListViewController {
 
     func taskViewController(for task: OCKAnyTask,
                             on date: Date) -> [UIViewController]? {
+        /*
+         TODO: CareKit has 3 plotType's: .bar, .scatter, and .line.
+         You should have a 3 types in your InsightView meaning you
+         should have at least 3 charts. Remember that all of your
+         tasks need to be graphed so you may have more. The solution
+         for not this should not be to show all 3 plot types for a
+         single task. Your code should be flexible enough to determine
+         a graph type. Instead, you should look extend OCKTask and OCKAnyTask
+         to add a "graph" property similar to "card". This means you probably
+         should create a "GraphCard" enum similar to "CareKitCard" and allow
+         the user to select the specific graph when adding a new task.
+         Hint - you should look at the same function in CareViewController
+         to determine how to switch graphs on an enum.
+         */
+
+        let surveyTaskID = CheckIn().identifier() // Only used for example.
+        
         switch task.id {
-        case CheckIn().identifier():
-
-
-            // dynamic gradient colors
-            let checkInGradientStart = TintColorFlipKey.defaultValue
-            let checkInGradientEnd = TintColorKey.defaultValue
-
+        case surveyTaskID:
+            
             /*
              Note that that there's a small bug for the check in graph because
              it averages all of the "Pain + Sleep" hours. This okay for now. If
              you are collecting ResearchKit input that only collects 1 value per
              survey, you won't have this problem.
              */
-            let checkInDataSeries = OCKDataSeriesConfiguration(
-                taskID: CheckIn().identifier(),
-                legendTitle: "Check In",
-                gradientStartColor: checkInGradientStart,
-                gradientEndColor: checkInGradientEnd,
-                markerSize: 10,
-                eventAggregator: .aggregatorMean())
+            
+            // dynamic gradient colors
+            let meanGradientStart = TintColorFlipKey.defaultValue
+            let meanGradientEnd = TintColorKey.defaultValue
 
-            /*
-             TODO: CareKit has 3 plotType's: .bar, .scatter, and .line.
-             You should have a 3 types in your InsightView meaning you
-             should have at least 3 charts. Remember that all of your
-             tasks need to be graphed so you may have more. The solution
-             for not this should not be to show all 3 plot types for a
-             single task. Your code should be flexible enough to determine
-             a graph type. Instead, you should look extend OCKTask and OCKAnyTask
-             to add a "graph" property similar to "card". This means you probably
-             should create a "GraphCard" enum similar to "CareKitCard" and allow
-             the user to select the specific graph when adding a new task.
-             Hint - you should look at the same function in CareViewController
-             to determine how to switch graphs on an enum.
-             */
+            // Create a plot comparing mean to median.
+            let meanDataSeries = OCKDataSeriesConfiguration(
+                taskID: surveyTaskID,
+                legendTitle: "Mean",
+                gradientStartColor: meanGradientStart,
+                gradientEndColor: meanGradientEnd,
+                markerSize: 10,
+                eventAggregator: .aggregatorMean(CheckIn.sleepItemIdentifier))
+
+            let medianDataSeries = OCKDataSeriesConfiguration(
+                taskID: surveyTaskID,
+                legendTitle: "Median",
+                gradientStartColor: .systemGray2,
+                gradientEndColor: .systemGray,
+                markerSize: 10,
+                eventAggregator: .aggregatorMedian(CheckIn.sleepItemIdentifier))
+
             let insightsCard = OCKCartesianChartViewController(
-                plotType: .bar,
+                plotType: .line,
                 selectedDate: date,
-                configurations: [checkInDataSeries],
+                configurations: [meanDataSeries, medianDataSeries],
                 storeManager: self.storeManager)
 
-            insightsCard.chartView.headerView.titleLabel.text = "Average Check In's"
+            insightsCard.chartView.headerView.titleLabel.text = "Sleep Mean & Median"
             insightsCard.chartView.headerView.detailLabel.text = "This Week"
-            insightsCard.chartView.headerView.accessibilityLabel = "Average Check In's, This Week"
+            insightsCard.chartView.headerView.accessibilityLabel = "Mean & Median, This Week"
 
             return [insightsCard]
 
