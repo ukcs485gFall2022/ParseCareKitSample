@@ -53,12 +53,17 @@ class CardViewModel: OCKTaskController {
         self.query?.perform(using: self)
     }
 
+    /**
+     Set the query property for this class.
+     - parameter query: The query to keep in sync with this view model.
+     */
     func setQuery(_ query: SynchronizedTaskQuery) {
         self.query = query
     }
 }
 
 extension CardViewModel {
+    /// Creates a query that can be used to synchronize `CardViewModel`'s.
     enum SynchronizedTaskQuery {
 
         case taskQuery(_ taskQuery: OCKTaskQuery, _ eventQuery: OCKEventQuery)
