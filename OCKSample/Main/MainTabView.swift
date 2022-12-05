@@ -28,25 +28,25 @@ struct MainTabView: View {
                 }
                 .tag(0)
 
-            ContactView()
+            InsightsView()
                 .tabItem {
                     if selectedTab == 1 {
-                        Image(systemName: "phone.bubble.left.fill")
+                        Image(systemName: "chart.pie.fill")
                             .renderingMode(.template)
                     } else {
-                        Image(systemName: "phone.bubble.left")
+                        Image(systemName: "chart.pie")
                             .renderingMode(.template)
                     }
                 }
                 .tag(1)
 
-            InsightsView()
+            ContactView()
                 .tabItem {
                     if selectedTab == 2 {
-                        Image(systemName: "chart.pie.fill")
+                        Image(systemName: "phone.bubble.left.fill")
                             .renderingMode(.template)
                     } else {
-                        Image(systemName: "chart.pie")
+                        Image(systemName: "phone.bubble.left")
                             .renderingMode(.template)
                     }
                 }
