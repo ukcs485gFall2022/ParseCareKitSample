@@ -31,10 +31,10 @@ struct MainTabView: View {
             ContactView()
                 .tabItem {
                     if selectedTab == 1 {
-                        Image("phone.bubble.left.fill")
+                        Image(systemName: "phone.bubble.left.fill")
                             .renderingMode(.template)
                     } else {
-                        Image("phone.bubble.left")
+                        Image(systemName: "phone.bubble.left")
                             .renderingMode(.template)
                     }
                 }
@@ -43,15 +43,15 @@ struct MainTabView: View {
             InsightsView()
                 .tabItem {
                     if selectedTab == 2 {
-                        Image("chart.pie.fill")
+                        Image(systemName: "chart.pie.fill")
                             .renderingMode(.template)
                     } else {
-                        Image("chart.pie")
+                        Image(systemName: "chart.pie")
                             .renderingMode(.template)
                     }
                 }
                 .tag(2)
-            
+
             ProfileView(loginViewModel: loginViewModel)
                 .tabItem {
                     if selectedTab == 3 {

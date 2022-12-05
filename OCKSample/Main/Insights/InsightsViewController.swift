@@ -7,7 +7,8 @@
 //
 
 /*
- You should notice this looks like CareView and MyContactView combined,
+ You should notice this looks like CareViewController and
+ MyContactViewController combined,
  but only shows charts instead.
 */
 
@@ -74,7 +75,9 @@ class InsightsViewController: OCKListViewController {
         query.excludesTasksWithNoEvents = true
         do {
             let tasks = try await storeManager.store.fetchAnyTasks(query: query)
-            let orderedTasks = TaskID.ordered.compactMap { orderedTaskID in
+            var taskIDs = TaskID.ordered
+            taskIDs.append(CheckIn().identifier())
+            let orderedTasks = taskIDs.compactMap { orderedTaskID in
                 tasks.first(where: { $0.id == orderedTaskID }) }
             return orderedTasks
         } catch {
@@ -105,18 +108,19 @@ class InsightsViewController: OCKListViewController {
          to determine how to switch graphs on an enum.
          */
 
-        let surveyTaskID = CheckIn().identifier() // Only used for example.
-        
+        let survey = CheckIn() // Only used for example.
+        let surveyTaskID = survey.identifier() // Only used for example.
+
         switch task.id {
         case surveyTaskID:
-            
+
             /*
              Note that that there's a small bug for the check in graph because
              it averages all of the "Pain + Sleep" hours. This okay for now. If
              you are collecting ResearchKit input that only collects 1 value per
              survey, you won't have this problem.
              */
-            
+
             // dynamic gradient colors
             let meanGradientStart = TintColorFlipKey.defaultValue
             let meanGradientEnd = TintColorKey.defaultValue

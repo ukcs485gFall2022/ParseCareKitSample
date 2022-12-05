@@ -12,9 +12,8 @@ struct InsightsView: UIViewControllerRepresentable {
     @State var storeManager = StoreManagerKey.defaultValue
 
     func makeUIViewController(context: Context) -> some UIViewController {
-        let viewController = CareViewController(storeManager: storeManager)
+        let viewController = InsightsViewController(storeManager: storeManager)
         let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.navigationBar.backgroundColor = UIColor { $0.userInterfaceStyle == .light ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1): #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1) }
         return navigationController
     }
 
