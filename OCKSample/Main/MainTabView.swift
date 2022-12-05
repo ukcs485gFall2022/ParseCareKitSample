@@ -40,9 +40,21 @@ struct MainTabView: View {
                 }
                 .tag(1)
 
-            ProfileView(loginViewModel: loginViewModel)
+            InsightsView()
                 .tabItem {
                     if selectedTab == 2 {
+                        Image("chart.pie.fill")
+                            .renderingMode(.template)
+                    } else {
+                        Image("chart.pie")
+                            .renderingMode(.template)
+                    }
+                }
+                .tag(2)
+            
+            ProfileView(loginViewModel: loginViewModel)
+                .tabItem {
+                    if selectedTab == 3 {
                         Image("connect-filled")
                             .renderingMode(.template)
                     } else {
@@ -50,7 +62,7 @@ struct MainTabView: View {
                             .renderingMode(.template)
                     }
                 }
-                .tag(2)
+                .tag(3)
         }
         .navigationBarHidden(true)
     }
