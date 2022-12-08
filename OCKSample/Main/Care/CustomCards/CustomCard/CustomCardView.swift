@@ -59,7 +59,7 @@ struct CustomCardView: View {
                     Text("Input: ")
                         .font(Font.headline)
                     TextField("0.0",
-                              value: $viewModel.value,
+                              value: $viewModel.valueAsDouble,
                               formatter: viewModel.amountFormatter)
                         .keyboardType(.decimalPad)
                         .font(Font.title.weight(.bold))
@@ -79,7 +79,7 @@ struct CustomCardView: View {
                         }
                     }
 
-                    Text(viewModel.valueForButton)
+                    (viewModel.valueText ?? Text("0.0"))
                         .multilineTextAlignment(.trailing)
                         .font(Font.title.weight(.bold))
                         .foregroundColor(.accentColor)
@@ -94,6 +94,14 @@ struct CustomCardView: View {
              can't be overriden in viewModel.
              */
             viewModel.checkIfValueShouldUpdate(taskEvents)
+        }
+        .onReceive(viewModel.$error) { error in
+            /*
+             DO NOT CHANGE THIS. The viewModel needs help
+             from view to update "currentError" since taskEvents
+             can't be overriden in viewModel.
+             */
+            viewModel.setError(error)
         }
     }
 }
